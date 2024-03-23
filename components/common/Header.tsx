@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { MoonIcon, SunIcon } from "@radix-ui/react-icons";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-
+import ConnectMetamask from "./ConnectWallet/index"
 export default function Header() {
     const { setTheme } = useTheme()
 
@@ -36,9 +36,9 @@ export default function Header() {
                                 </DropdownMenuItem>
                             </DropdownMenuContent>
                         </DropdownMenu>
-                        {/* <Button>
-                            Connect Wallet
-                        </Button> */}
+                        <div>
+                            <ConnectMetamask />
+                        </div>
                     </div>
                 </div>
                 <Separator />

@@ -15,7 +15,7 @@ export default function Header() {
         <>
             <div className="w-full rounded-lg">
                 <div className="max-w-[90%] w-full px-3 xl:p-0 my-5 mx-auto flex justify-between items-center">
-                    <Label className="text-2xl">Phantom NFT Sync</Label>
+                    <Label className="text-2xl">SolSync</Label>
                     <div className="flex items-center gap-5">
                         <DropdownMenu>
                             <DropdownMenuTrigger asChild>

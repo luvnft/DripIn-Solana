@@ -4,7 +4,6 @@ import "./globals.css";
 import React, { useMemo } from "react";
 import { Sora } from "next/font/google";
 import Header from "@/components/common/Header";
-import { ThemeProvider } from "@/components/theme-provider";
 import { PhantomWalletAdapter } from "@solana/wallet-adapter-wallets";
 import { WalletModalProvider } from "@solana/wallet-adapter-react-ui";
 import { ConnectionProvider, WalletProvider } from "@solana/wallet-adapter-react";
@@ -23,19 +22,14 @@ export default function RootLayout({
 
     return (
         <html lang="en">
-            <body className={sora.className}>
+            <body className={`${sora.className} bg-[#040507] text-white`}>
                 <ConnectionProvider endpoint={endpoint}>
                     <WalletProvider wallets={wallets} autoConnect>
                         <WalletModalProvider>
-                            <ThemeProvider
-                                attribute="class"
-                                defaultTheme="system"
-                                enableSystem
-                                disableTransitionOnChange
-                            >
+                            <>
                                 <Header />
                                 {children}
-                            </ThemeProvider>
+                            </>
                         </WalletModalProvider>
                     </WalletProvider>
                 </ConnectionProvider>

@@ -5,8 +5,9 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { MoonIcon, SunIcon } from "@radix-ui/react-icons";
+import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import ConnectMetamask from "./ConnectWallet/index"
+
 export default function Header() {
     const { setTheme } = useTheme()
 
@@ -36,9 +37,7 @@ export default function Header() {
                                 </DropdownMenuItem>
                             </DropdownMenuContent>
                         </DropdownMenu>
-                        <div>
-                            <ConnectMetamask />
-                        </div>
+                        <WalletMultiButton />
                     </div>
                 </div>
                 <Separator />

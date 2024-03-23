@@ -1,8 +1,15 @@
 import "./globals.css";
 import type { Metadata } from "next";
+import React, { useMemo } from "react";
 import { Sora } from "next/font/google";
 import Header from "@/components/common/Header";
 import { ThemeProvider } from "@/components/theme-provider";
+import { WalletAdapterNetwork } from "@solana/wallet-adapter-base";
+import { PhantomWalletAdapter } from "@solana/wallet-adapter-wallets";
+import { WalletModalProvider } from "@solana/wallet-adapter-react-ui";
+import { ConnectionProvider, WalletProvider } from "@solana/wallet-adapter-react";
+
+require("@solana/wallet-adapter-react-ui/styles.css");
 
 const sora = Sora({ subsets: ["latin"] });
 
@@ -16,18 +23,27 @@ export default function RootLayout({
 }: Readonly<{
     children: React.ReactNode;
 }>) {
+    const endpoint = WalletAdapterNetwork.Devnet;
+    const wallets = useMemo(() => [new PhantomWalletAdapter()], []);
+
     return (
         <html lang="en">
             <body className={sora.className}>
-                <ThemeProvider
-                    attribute="class"
-                    defaultTheme="system"
-                    enableSystem
-                    disableTransitionOnChange
-                >
-                    <Header />
-                    {children}
-                </ThemeProvider>
+                <ConnectionProvider endpoint={endpoint}>
+                    <WalletProvider wallets={wallets} autoConnect>
+                        <WalletModalProvider>
+                            <ThemeProvider
+                                attribute="class"
+                                defaultTheme="system"
+                                enableSystem
+                                disableTransitionOnChange
+                            >
+                                <Header />
+                                {children}
+                            </ThemeProvider>
+                        </WalletModalProvider>
+                    </WalletProvider>
+                </ConnectionProvider>
             </body>
         </html>
     );

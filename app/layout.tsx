@@ -33,7 +33,9 @@ export default function RootLayout({
                                     defaultTheme="dark"
                                 >
                                     <Header />
-                                    {children}
+                                    <div className="w-full max-w-[90%] mx-auto">
+                                        {children}
+                                    </div>
                                 </ThemeProvider>
                             </>
                         </WalletModalProvider>

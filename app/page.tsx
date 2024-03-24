@@ -26,14 +26,24 @@ export default function Home() {
 
     return (
         <>
-            <Card>
-                <CardHeader>
-                    <CardTitle>Total NFTs</CardTitle>
-                </CardHeader>
-                <CardContent>
-                    <Label className="text-2xl">{tokens?.items.total}</Label>
-                </CardContent>
-            </Card>
+            <div className="grid grid-cols-2 max-sm:grid-cols-1 gap-4">
+                <Card>
+                    <CardHeader>
+                        <CardTitle>Total NFTs</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                        <Label className="text-2xl">{tokens?.items.total}</Label>
+                    </CardContent>
+                </Card>
+                <Card>
+                    <CardHeader>
+                        <CardTitle>Total NFTs</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                        <Label className="text-2xl">{tokens?.items.total}</Label>
+                    </CardContent>
+                </Card>
+            </div>
 
             <pre>{JSON.stringify(tokens, null, 2)}</pre>
         </>

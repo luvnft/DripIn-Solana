@@ -1,14 +1,21 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import fetchTokens from "../lib/searchAssets";
+import fetchTokens from "@/lib/searchAssets";
+import { useWallet } from "@solana/wallet-adapter-react";
 
 export default function Home(req: any, res: any) {
     const [tokens, setTokens] = useState<any>(null);
+    const { publicKey } = useWallet();
 
     useEffect(() => {
-        fetchTokens("7KFerXQA71zx5nLGiqFz6mcDTWBzYAoAWXf9EkRbGx8u").then(setTokens).catch(console.error);
-    }, []);
+        if (publicKey){
+            const walletAddress = publicKey.toBase58(); // Convert the public key to a base58 string
+            fetchTokens(walletAddress)
+                .then(setTokens)
+                .catch(console.error); 
+        }
+    }, [publicKey])
 
     return (
         <div>

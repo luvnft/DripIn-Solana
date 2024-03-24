@@ -4,14 +4,18 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import fetchTokens from "@/lib/searchAssets";
 import { Label } from "@/components/ui/label";
-import ItemsResponse from "@/Types/SearchAssetsTypes";
+import { Button } from "@/components/ui/button";
+import ItemsResponse from "@/types/SearchAssetsTypes";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { Card, CardContent, CardDescription, CardHeader, CardFooter, CardTitle } from "@/components/ui/card";
 
 
 export default function Home() {
     const { publicKey } = useWallet();
+    const [page, setPage] = useState(0);
     const [tokens, setTokens] = useState<ItemsResponse | null>(null);
+
+    const perPage = 8;
 
     useEffect(() => {
         if (publicKey) {
@@ -24,6 +28,10 @@ export default function Home() {
             setTokens(null);
         }
     }, [publicKey])
+
+    const pageNavigation = (page: number) => {
+        return tokens?.items.items.slice(page * perPage, (page + 1) * perPage);
+    }
 
     return (
         <>
@@ -90,7 +98,7 @@ export default function Home() {
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4 gap-4">
-                {tokens?.items.items.map((item, index) => (
+                {pageNavigation(page)?.map((item, index) => (
                     <Card key={index}>
                         <CardHeader>
                             <CardTitle>{item.content.metadata.name}</CardTitle>
@@ -101,6 +109,36 @@ export default function Home() {
                         </CardContent>
                     </Card>
                 ))}
+
+                {tokens?.items.items.length === 0 && (
+                    <div className="col-span-full flex justify-center items-center">
+                        <Label className="text-xl text-red-400">
+                            No NFTs found
+                        </Label>
+                    </div>
+                )}
+
+                {tokens?.items.items.length! > 0 && (
+                    <div className="col-span-full flex justify-center items-center">
+                        <Button
+                            variant="secondary"
+                            onClick={() => setPage(page - 1)}
+                            disabled={page === 0}
+                        >
+                            Previous
+                        </Button>
+                        <Label className="ml-8">{page + 1}</Label>
+                        <Label className="mx-4">/</Label>
+                        <Label className="mr-8">{Math.floor(tokens?.items.total! / perPage) + 1}</Label>
+                        <Button
+                            variant="secondary"
+                            onClick={() => setPage(page + 1)}
+                            disabled={page === Math.floor(tokens?.items.total! / perPage)}
+                        >
+                            Next
+                        </Button>
+                    </div>
+                )}
             </div>
 
             {/* <pre>{JSON.stringify(tokens, null, 2)}</pre> */}

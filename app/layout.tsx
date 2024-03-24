@@ -24,7 +24,7 @@ export default function RootLayout({
 
     return (
         <html lang="en">
-            <body className={`${sora.className} bg-[#040507]`}>
+            <body className={`${sora.className}`}>
                 <ConnectionProvider endpoint={endpoint}>
                     <WalletProvider wallets={wallets} autoConnect>
                         <WalletModalProvider>

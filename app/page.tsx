@@ -32,15 +32,15 @@ export default function Home() {
                         <CardTitle>Total NFTs</CardTitle>
                     </CardHeader>
                     <CardContent>
-                        <Label className="text-2xl">{tokens?.items.total}</Label>
+                        <Label className="text-xl">{tokens?.items.total}</Label>
                     </CardContent>
                 </Card>
                 <Card>
                     <CardHeader>
-                        <CardTitle>Total NFTs</CardTitle>
+                        <CardTitle>Wallet Address</CardTitle>
                     </CardHeader>
                     <CardContent>
-                        <Label className="text-2xl">{tokens?.items.total}</Label>
+                        <Label className="text-xl">{publicKey?.toBase58()}</Label>
                     </CardContent>
                 </Card>
             </div>

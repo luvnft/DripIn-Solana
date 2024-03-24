@@ -1,20 +1,41 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import fetchTokens from "../lib/searchAssets";
+import fetchTokens from "@/lib/searchAssets";
+import { Label } from "@/components/ui/label";
+import ItemsResponse from "@/Types/SearchAssetsTypes";
+import { useWallet } from "@solana/wallet-adapter-react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-export default function Home(req: any, res: any) {
-    const [tokens, setTokens] = useState<any>(null);
+
+export default function Home() {
+    const { publicKey } = useWallet();
+    const [tokens, setTokens] = useState<ItemsResponse | null>(null);
 
     useEffect(() => {
-        fetchTokens("7KFerXQA71zx5nLGiqFz6mcDTWBzYAoAWXf9EkRbGx8u").then(setTokens).catch(console.error);
-    }, []);
+        if (publicKey) {
+            const walletAddress = publicKey.toBase58();
+            fetchTokens(walletAddress).then((data) => {
+                setTokens((data as unknown) as ItemsResponse);
+            }).catch(console.error);
+        }
+        else {
+            setTokens(null);
+        }
+    }, [publicKey])
 
     return (
-        <div>
-            <h1>Search Assets</h1>
-            <pre>{JSON.stringify(tokens, null, 2)}</pre>
-        </div>
-    );
+        <>
+            <Card>
+                <CardHeader>
+                    <CardTitle>Total NFTs</CardTitle>
+                </CardHeader>
+                <CardContent>
+                    <Label className="text-2xl">{tokens?.items.total}</Label>
+                </CardContent>
+            </Card>
 
+            <pre>{JSON.stringify(tokens, null, 2)}</pre>
+        </>
+    );
 }

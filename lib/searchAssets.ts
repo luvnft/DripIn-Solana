@@ -4,7 +4,7 @@ interface Tokens {
 }
 
 const fetchTokens = async (walletAddress: string): Promise<Tokens> => {
-    const url = process.env.NEXT_PUBLIC_HELIUS_API_URL || "https://mainnet.helius-rpc.com";
+    const url = `https://mainnet.helius-rpc.com/?api-key=${process.env.NEXT_PUBLIC_HELIUS_API_KEY}` || "https://mainnet.helius-rpc.com";
     console.log(
         `Starting search for tokens for wallet address: ${walletAddress}`
     );

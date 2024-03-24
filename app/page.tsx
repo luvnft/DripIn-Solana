@@ -26,15 +26,12 @@ export default function Home() {
 
     return (
         <>
-            <div className="w-full max-w-[90%] mx-auto">
-
-            </div>
             <Card>
                 <CardHeader>
                     <CardTitle>Total NFTs</CardTitle>
                 </CardHeader>
                 <CardContent>
-                    <Label>{tokens?.items.total}</Label>
+                    <Label className="text-2xl">{tokens?.items.total}</Label>
                 </CardContent>
             </Card>
 

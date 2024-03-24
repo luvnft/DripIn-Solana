@@ -1,4 +1,11 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+const nextConfig = {
+    images: {
+        remotePatterns: [
+            { hostname: 'arweave.net' },
+            { hostname: '**.arweave.net' },
+        ]
+    }
+};
 
 export default nextConfig;

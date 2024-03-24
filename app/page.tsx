@@ -15,6 +15,9 @@ export default function Home(req: any, res: any) {
                 .then(setTokens)
                 .catch(console.error); 
         }
+        else{
+            setTokens(null);
+        }
     }, [publicKey])
 
     return (

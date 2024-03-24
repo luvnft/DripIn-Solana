@@ -94,7 +94,7 @@ interface Item {
     burnt: boolean;
 }
 
-interface ItemsResponse {
+export interface ItemsResponse {
     items: {
         total: number;
         limit: number;
@@ -102,5 +102,3 @@ interface ItemsResponse {
         items: Item[];
     };
 }
-
-export default ItemsResponse;

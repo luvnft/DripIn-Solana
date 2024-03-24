@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import fetchTokens from "@/lib/searchAssets";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
-import ItemsResponse from "@/types/SearchAssetsTypes";
+import { ItemsResponse } from "@/types/SearchAssetsTypes";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { Card, CardContent, CardDescription, CardHeader, CardFooter, CardTitle } from "@/components/ui/card";
 

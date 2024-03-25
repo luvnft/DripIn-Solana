@@ -7,6 +7,7 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { ItemsResponse } from "@/types/SearchAssetsType";
 import { useWallet } from "@solana/wallet-adapter-react";
+import { ChevronLeftIcon, ChevronRightIcon } from "@radix-ui/react-icons";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
 
@@ -121,21 +122,23 @@ export default function Home() {
                 {tokens?.items.items.length! > 0 && (
                     <div className="col-span-full flex justify-center items-center">
                         <Button
-                            variant="secondary"
+                            variant="ghost"
                             onClick={() => setPage(page - 1)}
                             disabled={page === 0}
                         >
+                            <ChevronLeftIcon className="mr-2 h-4 w-4" />
                             Previous
                         </Button>
                         <Label className="ml-8">{page + 1}</Label>
                         <Label className="mx-4">/</Label>
                         <Label className="mr-8">{Math.floor(tokens?.items.total! / perPage) + 1}</Label>
                         <Button
-                            variant="secondary"
+                            variant="ghost"
                             onClick={() => setPage(page + 1)}
                             disabled={page === Math.floor(tokens?.items.total! / perPage)}
                         >
                             Next
+                            <ChevronRightIcon className="ml-2 h-4 w-4" />
                         </Button>
                     </div>
                 )}

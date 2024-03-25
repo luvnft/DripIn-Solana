@@ -60,6 +60,12 @@ interface Supply {
     edition_nonce: any; // You may replace `any` with appropriate type if known
 }
 
+interface Grouping {
+    group_key: string;
+    group_value: string;
+    collection_metadata: CollectionMetadata;
+}
+
 interface Item {
     interface: string;
     id: string;
@@ -81,11 +87,7 @@ interface Item {
         seq: number;
         leaf_id: number;
     };
-    grouping: {
-        group_key: string;
-        group_value: string;
-        collection_metadata: CollectionMetadata;
-    }[];
+    grouping: Grouping[];
     royalty: Royalty;
     creators: Creator[];
     ownership: Ownership;

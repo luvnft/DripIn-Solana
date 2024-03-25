@@ -5,14 +5,17 @@ import { useEffect, useState } from "react";
 import fetchTokens from "@/lib/searchAssets";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
-import { ItemsResponse } from "@/types/SearchAssetsType";
+import { Grouping } from "@/types/SearchAssetsType";
 import { useWallet } from "@solana/wallet-adapter-react";
+import { ItemsResponse } from "@/types/SearchAssetsType";
+import { ChevronLeftIcon, ChevronRightIcon } from "@radix-ui/react-icons";
+import SpinnerLoadingAnimation from "@/components/ui/spinnerLoadingAnimation";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-
 
 export default function Home() {
     const { publicKey } = useWallet();
     const [page, setPage] = useState(0);
+    const [collections, setCollections] = useState<Grouping[]>([]);
     const [tokens, setTokens] = useState<ItemsResponse | null>(null);
 
     const perPage = 8;
@@ -29,9 +32,23 @@ export default function Home() {
         }
     }, [publicKey])
 
+    useEffect(() => {
+        const collectionMap = new Map<string, Grouping>();
+        tokens?.items.items.forEach((nft) => {
+            const collection = nft.grouping.find((g) => g.group_key === "collection");
+            if (collection && collection.collection_metadata) {
+                collectionMap.set(collection.group_value, collection);
+            }
+        });
+        setCollections(Array.from(collectionMap.values()));
+    }, [tokens?.items.items]);
+
     const pageNavigation = (page: number) => {
-        return tokens?.items.items.slice(page * perPage, (page + 1) * perPage);
+        return collections.slice(page * perPage, (page + 1) * perPage);
     }
+
+    const TotalNFTs = tokens?.items.total;
+    const TotalCollections = collections.length;
 
     return (
         <>
@@ -59,40 +76,50 @@ export default function Home() {
                     publicKey?.toBase58() === undefined ? (
                         null
                     ) : (
-                        <Card>
-                            <CardHeader>
-                                <CardTitle>Total NFTs</CardTitle>
-                            </CardHeader>
-                            <CardContent>
-                                {
-                                    tokens?.items.total === undefined ? (
-                                        <Label className="flex gap-2 text-xl">
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                width="24"
-                                                height="24"
-                                                viewBox="0 0 24 24"
-                                                fill="none"
-                                                stroke="currentColor"
-                                                strokeWidth="2"
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                className="animate-spin h-6 w-6 text-primary-500"
-                                            >
-                                                <path d="M21 12a9 9 0 1 1-6.219-8.56" />
-                                            </svg>
-                                            Loading...
-                                        </Label>
-                                    ) : (
-                                        <>
-                                            <Label className="text-xl">
-                                                {tokens?.items.total}
+                        <div className="grid grid-cols-2 gap-4">
+                            <Card>
+                                <CardHeader>
+                                    <CardTitle>Total Collections</CardTitle>
+                                </CardHeader>
+                                <CardContent>
+                                    {
+                                        TotalNFTs === undefined ? (
+                                            <Label className="flex gap-2 text-xl">
+                                                <SpinnerLoadingAnimation size={24} />
+                                                Loading...
                                             </Label>
-                                        </>
-                                    )
-                                }
-                            </CardContent>
-                        </Card>
+                                        ) : (
+                                            <>
+                                                <Label className="text-xl">
+                                                    {TotalCollections}
+                                                </Label>
+                                            </>
+                                        )
+                                    }
+                                </CardContent>
+                            </Card>
+                            <Card>
+                                <CardHeader>
+                                    <CardTitle>Total NFTs</CardTitle>
+                                </CardHeader>
+                                <CardContent>
+                                    {
+                                        TotalNFTs === undefined ? (
+                                            <Label className="flex gap-2 text-xl">
+                                                <SpinnerLoadingAnimation size={24} />
+                                                Loading...
+                                            </Label>
+                                        ) : (
+                                            <>
+                                                <Label className="text-xl">
+                                                    {TotalNFTs}
+                                                </Label>
+                                            </>
+                                        )
+                                    }
+                                </CardContent>
+                            </Card>
+                        </div>
                     )
                 }
             </div>
@@ -101,11 +128,16 @@ export default function Home() {
                 {pageNavigation(page)?.map((item, index) => (
                     <Card key={index}>
                         <CardHeader>
-                            <CardTitle>{item.content.metadata.name}</CardTitle>
-                            <CardDescription>{item.grouping[0].collection_metadata.name}</CardDescription>
+                            <CardTitle>{item.collection_metadata.name}</CardTitle>
                         </CardHeader>
                         <CardContent>
-                            <Image src={item.content.files[0].uri} width={512} height={512} alt={item.content.metadata.name} className="aspect-square w-full h-full rounded-md" />
+                            <Image
+                                width={512}
+                                height={512}
+                                src={item.collection_metadata.image}
+                                alt={item.collection_metadata.name}
+                                className="aspect-square border-2 object-contain w-full h-full rounded-md"
+                            />
                         </CardContent>
                     </Card>
                 ))}
@@ -121,27 +153,30 @@ export default function Home() {
                 {tokens?.items.items.length! > 0 && (
                     <div className="col-span-full flex justify-center items-center">
                         <Button
-                            variant="secondary"
+                            variant="ghost"
                             onClick={() => setPage(page - 1)}
                             disabled={page === 0}
                         >
+                            <ChevronLeftIcon className="mr-2 h-4 w-4" />
                             Previous
                         </Button>
                         <Label className="ml-8">{page + 1}</Label>
                         <Label className="mx-4">/</Label>
-                        <Label className="mr-8">{Math.floor(tokens?.items.total! / perPage) + 1}</Label>
+                        <Label className="mr-8">{Math.floor(TotalCollections! / perPage) + 1}</Label>
                         <Button
-                            variant="secondary"
+                            variant="ghost"
                             onClick={() => setPage(page + 1)}
-                            disabled={page === Math.floor(tokens?.items.total! / perPage)}
+                            disabled={page === Math.floor(TotalCollections! / perPage)}
                         >
                             Next
+                            <ChevronRightIcon className="ml-2 h-4 w-4" />
                         </Button>
                     </div>
                 )}
             </div>
 
-            {/* <pre>{JSON.stringify(tokens, null, 2)}</pre> */}
+            {/* <pre>{JSON.stringify(collections, null, 2)}</pre> */}
+            {/* <pre>{JSON.stringify(tokens?.items.items.slice(0, 1), null, 2)}</pre> */}
         </>
     );
 }

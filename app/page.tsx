@@ -106,7 +106,7 @@ export default function Home() {
                             <CardDescription>{item.grouping[0].collection_metadata.name}</CardDescription>
                         </CardHeader>
                         <CardContent>
-                            <Image src={item.content.files[0].uri} width={512} height={512} alt={item.content.metadata.name} className="aspect-square w-full h-full rounded-md" />
+                            <Image src={item.content.files[0].uri} width={512} height={512} alt={item.content.metadata.name} className="aspect-square border-2 object-contain w-full h-full rounded-md" />
                         </CardContent>
                     </Card>
                 ))}

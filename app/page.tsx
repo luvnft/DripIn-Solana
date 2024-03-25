@@ -5,8 +5,8 @@ import { useEffect, useState } from "react";
 import fetchTokens from "@/lib/searchAssets";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
-import { ItemsResponse } from "@/types/SearchAssetsType";
 import { useWallet } from "@solana/wallet-adapter-react";
+import { ItemsResponse } from "@/types/SearchAssetsType";
 import { ChevronLeftIcon, ChevronRightIcon } from "@radix-ui/react-icons";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
@@ -14,6 +14,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 export default function Home() {
     const { publicKey } = useWallet();
     const [page, setPage] = useState(0);
+    const [groupDataValues, setGroupDataValues] = useState<any[]>([]);
     const [tokens, setTokens] = useState<ItemsResponse | null>(null);
 
     const perPage = 8;
@@ -29,6 +30,16 @@ export default function Home() {
             setTokens(null);
         }
     }, [publicKey])
+
+    useEffect(() => {
+        const groupDataValue = new Set<any>();
+        tokens?.items.items.map((item) => {
+            item.grouping.forEach((group) => {
+                groupDataValue.add(group.group_value)
+            });
+        });
+        setGroupDataValues(Array.from(groupDataValue));
+    }, [tokens?.items.items])
 
     const pageNavigation = (page: number) => {
         return tokens?.items.items.slice(page * perPage, (page + 1) * perPage);
@@ -144,7 +155,8 @@ export default function Home() {
                 )}
             </div>
 
-            {/* <pre>{JSON.stringify(tokens, null, 2)}</pre> */}
+            <pre>{JSON.stringify(groupDataValues, null, 2)}</pre>
+            {/* <pre>{JSON.stringify(tokens?.items.items.slice(0, 1), null, 2)}</pre> */}
         </>
     );
 }

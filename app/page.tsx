@@ -127,7 +127,7 @@ export default function Home() {
             <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4 gap-4">
                 {pageNavigation(page)?.map((item, index) => (
                     <Card key={index}>
-                        <CardContent>
+                        <CardContent className="pt-6">
                             <Image
                                 width={512}
                                 height={512}
@@ -136,7 +136,7 @@ export default function Home() {
                                 className="aspect-square border-2 object-contain w-full h-full rounded-md"
                             />
                         </CardContent>
-                        <CardHeader>
+                        <CardHeader className="pt-0">
                             <CardTitle>{item.collection_metadata.name}</CardTitle>
                         </CardHeader>
                     </Card>

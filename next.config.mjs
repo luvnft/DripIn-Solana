@@ -2,10 +2,12 @@
 const nextConfig = {
     images: {
         remotePatterns: [
-            { hostname: 'arweave.net' },
-            { hostname: '**.arweave.net' },
-        ]
-    }
+            {
+                protocol: "https",
+                hostname: "**",
+            },
+        ],
+    },
 };
 
 export default nextConfig;

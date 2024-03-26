@@ -3,6 +3,7 @@
 import "./globals.css";
 import React, { useMemo } from "react";
 import { Sora } from "next/font/google";
+import NextTopLoader from 'nextjs-toploader';
 import Header from "@/components/common/Header";
 import Footer from "@/components/common/Footer";
 import { ThemeProvider } from "@/components/theme-provider";
@@ -24,6 +25,9 @@ export default function RootLayout({
 
     return (
         <html lang="en">
+            <head>
+                <title>SolSync</title>
+            </head>
             <body className={`${sora.className}`}>
                 <ConnectionProvider endpoint={endpoint}>
                     <WalletProvider wallets={wallets} autoConnect>
@@ -34,6 +38,7 @@ export default function RootLayout({
                                     defaultTheme="dark"
                                 >
                                     <main className="flex flex-col min-h-screen">
+                                        <NextTopLoader color="#8752F3" showSpinner={false} />
                                         <Header />
                                         <div className="w-full max-w-[95vw] mx-auto ">
                                             {children}

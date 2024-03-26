@@ -20,6 +20,8 @@ export default function Header() {
                     </Link>
 
                     <div className="flex items-center gap-5">
+                        <Link href="../discover">Discover</Link>
+                        <Link href="../collections">Collections</Link>
                         <DropdownMenu>
                             <DropdownMenuTrigger asChild>
                                 <Button variant="outline" size="icon">

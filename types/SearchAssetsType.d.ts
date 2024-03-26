@@ -66,7 +66,7 @@ interface Grouping {
     collection_metadata: CollectionMetadata;
 }
 
-interface Item {
+export interface Item {
     interface: string;
     id: string;
     content: {

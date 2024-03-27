@@ -3,19 +3,25 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Video } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { useEffect, useState } from "react";
 import fetchTokens from "@/lib/searchAssets";
+import { Badge } from "@/components/ui/badge";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Item } from "@/types/SearchAssetsType";
 import { Skeleton } from "@/components/ui/skeleton";
 import { ItemsResponse } from "@/types/SearchAssetsType";
 import { useWallet } from "@solana/wallet-adapter-react";
+import { ChevronLeftIcon, ChevronRightIcon, DownloadIcon } from "@radix-ui/react-icons";
 import SpinnerLoadingAnimation from "@/components/ui/spinnerLoadingAnimation";
 import { Card, CardContent, CardDescription, CardHeader, CardFooter, CardTitle } from "@/components/ui/card";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger, } from "@/components/ui/dialog";
 
 export default function SpecificCollectionPageHome({ params }: { params: { CollectionID: string }; }) {
+    const perPage = 6;
     const { publicKey } = useWallet();
+    const [page, setPage] = useState(0);
     const [tokens, setTokens] = useState<ItemsResponse | null>(null);
     const [collectionNFTData, setCollectionNFTData] = useState<Item[] | null>(null);
 
@@ -43,7 +49,13 @@ export default function SpecificCollectionPageHome({ params }: { params: { Colle
 
     console.log(collectionNFTData);
 
+    const pageNavigation = (page: number) => {
+        return collectionNFTData?.slice(page * perPage, (page + 1) * perPage);
+    }
+
     const TotalNFTs = tokens?.items.total;
+
+    const TotalCollections = collectionNFTData?.length;
 
     return (
         <>
@@ -55,7 +67,7 @@ export default function SpecificCollectionPageHome({ params }: { params: { Colle
                 ))
             }
 
-            <div className="flex flex-row">
+            <div className="flex flex-row gap-4">
                 <div className="basis-1/3 pt-6">
                     {
                         collectionNFTData === null ? (
@@ -137,6 +149,151 @@ export default function SpecificCollectionPageHome({ params }: { params: { Colle
                             </>
                         )
                     }
+                </div>
+                <div className="basis-2/3 pt-6">
+                    <>
+                        {collectionNFTData === null ? (
+                            <>
+                                <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4">
+                                    {new Array(perPage).fill(null).map(() => (
+                                        <>
+                                            <Card>
+                                                <CardContent className="pt-6">
+                                                    <Skeleton className="aspect-square border-2 object-contain w-full h-full rounded-md" />
+                                                </CardContent>
+                                                <CardHeader className="pt-0">
+                                                    <CardTitle>
+                                                        <Skeleton className="h-8" />
+                                                    </CardTitle>
+                                                </CardHeader>
+                                                <CardFooter>
+                                                    <Skeleton className="h-10 w-44" />
+                                                </CardFooter>
+                                            </Card>
+                                        </>
+                                    ))}
+                                </div>
+
+                                <div className="col-span-full flex justify-center items-center mt-4">
+                                    <Button
+                                        variant="ghost"
+                                        onClick={() => setPage(page - 1)}
+                                        disabled={page === 0}
+                                    >
+                                        <ChevronLeftIcon className="mr-2 h-4 w-4" />
+                                        Previous
+                                    </Button>
+                                    <Skeleton className="h-5 w-7" />
+                                    <Label className="mx-4">/</Label>
+                                    <Skeleton className="h-5 w-7" />
+                                    <Button
+                                        variant="ghost"
+                                        onClick={() => setPage(page + 1)}
+                                        disabled={page === Math.floor(TotalCollections! / perPage)}
+                                    >
+                                        Next
+                                        <ChevronRightIcon className="ml-2 h-4 w-4" />
+                                    </Button>
+                                </div>
+                            </>
+                        ) : (
+                            <>
+                                <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4">
+                                    {pageNavigation(page)?.map((item, index) => (
+                                        <Card key={index}>
+                                            <CardContent className="pt-6">
+                                                <Image
+                                                    width={512}
+                                                    height={512}
+                                                    src={item.content.links.image}
+                                                    alt={item.content.metadata.name}
+                                                    className="aspect-square border-2 object-contain w-full h-full rounded-md"
+                                                />
+                                            </CardContent>
+                                            <CardHeader className="pt-0">
+                                                <CardTitle>{item.content.metadata.name}</CardTitle>
+                                            </CardHeader>
+                                            <CardFooter className="justify-between">
+                                                <Badge variant="outline" className="text-lg">
+                                                    {item.content.metadata.attributes[item.content.metadata.attributes.length - 1].value}
+                                                </Badge>
+
+                                                <Dialog>
+                                                    <DialogTrigger>
+                                                        <Button variant="outline" className="flex items-center gap-2 cursor-pointer">
+                                                            View NFT
+                                                            <ArrowRight size={18} className="max-sm:w-4 cursor-pointer" />
+                                                        </Button>
+                                                    </DialogTrigger>
+                                                    <DialogContent>
+                                                        <Image
+                                                            width={512}
+                                                            height={512}
+                                                            src={item.content.links.image}
+                                                            alt={item.content.metadata.name}
+                                                            className="aspect-square border-2 object-contain w-full h-full rounded-md"
+                                                        />
+                                                        <DialogHeader>
+                                                            <DialogTitle className="flex items-center justify-between">
+                                                                {item.content.metadata.name}
+                                                                <Badge variant="outline" className="text-md">
+                                                                    {item.content.metadata.attributes[item.content.metadata.attributes.length - 1].value}
+                                                                </Badge>
+                                                            </DialogTitle>
+                                                            <DialogDescription>
+                                                                {item.content.metadata.description}
+                                                            </DialogDescription>
+                                                            <Link href={item.content.links.image} target="_blank" className="flex pt-4">
+                                                                <Button variant="outline" className="w-full">
+                                                                    <DownloadIcon className="mr-2 h-4 w-4" />
+                                                                    Download
+                                                                </Button>
+                                                            </Link>
+                                                        </DialogHeader>
+                                                    </DialogContent>
+                                                </Dialog>
+                                            </CardFooter>
+                                        </Card>
+                                    ))}
+                                </div>
+
+                                {tokens?.items.items.length! > 0 && (
+                                    <div className="col-span-full flex justify-center items-center mt-4">
+                                        <Button
+                                            variant="ghost"
+                                            onClick={() => setPage(page - 1)}
+                                            disabled={page === 0}
+                                        >
+                                            <ChevronLeftIcon className="mr-2 h-4 w-4" />
+                                            Previous
+                                        </Button>
+                                        <Label className="ml-8">{page + 1}</Label>
+                                        <Label className="mx-4">/</Label>
+                                        <Label className="mr-8">{Math.floor(TotalCollections! / perPage) + 1}</Label>
+                                        <Button
+                                            variant="ghost"
+                                            onClick={() => setPage(page + 1)}
+                                            disabled={page === Math.floor(TotalCollections! / perPage)}
+                                        >
+                                            Next
+                                            <ChevronRightIcon className="ml-2 h-4 w-4" />
+                                        </Button>
+                                    </div>
+                                )}
+
+                                {tokens?.items.items.length === 0 && (
+                                    <div className="col-span-full h-[60vh] flex justify-center items-center">
+                                        <Label className="text-xl text-red-400">
+                                            No NFTs found
+                                        </Label>
+                                    </div>
+                                )}
+                            </>
+                        )}
+                    </>
+
+                    {/* {collectionNFTData?.length} */}
+                    {/* <pre>{JSON.stringify(collectionNFTData, null, 2)}</pre> */}
                 </div>
             </div>
         </>

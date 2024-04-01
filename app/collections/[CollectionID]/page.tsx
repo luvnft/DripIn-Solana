@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { Room } from "@/app/Room";
 import { Video } from "lucide-react";
 import { ArrowRight } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -12,9 +11,10 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Item } from "@/types/SearchAssetsType";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Room } from "@/components/liveblocks/Room";
 import { ItemsResponse } from "@/types/SearchAssetsType";
 import { useWallet } from "@solana/wallet-adapter-react";
-import { CollaborativeApp } from "@/app/CollaborativeApp";
+import { CollaborativeApp } from "@/components/liveblocks/CollaborativeApp";
 import SpinnerLoadingAnimation from "@/components/ui/spinnerLoadingAnimation";
 import { ChevronLeftIcon, ChevronRightIcon, DownloadIcon } from "@radix-ui/react-icons";
 import { Card, CardContent, CardDescription, CardHeader, CardFooter, CardTitle } from "@/components/ui/card";

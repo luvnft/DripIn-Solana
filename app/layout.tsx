@@ -1,6 +1,7 @@
 "use client";
 
 import "./globals.css";
+import "@/style/SolanaWallet.css";
 import React, { useMemo } from "react";
 import { Sora } from "next/font/google";
 import NextTopLoader from 'nextjs-toploader';
@@ -11,7 +12,6 @@ import { PhantomWalletAdapter } from "@solana/wallet-adapter-wallets";
 import { WalletModalProvider } from "@solana/wallet-adapter-react-ui";
 import { ConnectionProvider, WalletProvider } from "@solana/wallet-adapter-react";
 
-require("@solana/wallet-adapter-react-ui/styles.css");
 
 const sora = Sora({ subsets: ["latin"] });
 
@@ -35,7 +35,9 @@ export default function RootLayout({
                             <>
                                 <ThemeProvider
                                     attribute="class"
-                                    defaultTheme="dark"
+                                    defaultTheme="system"
+                                    enableSystem
+                                    disableTransitionOnChange
                                 >
                                     <main className="flex flex-col min-h-screen">
                                         <NextTopLoader color="#8752F3" showSpinner={false} />

@@ -2,14 +2,31 @@
 
 import Link from "next/link";
 import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
+import { User, LogOut, ListTree } from "lucide-react";
+import { useWallet } from "@solana/wallet-adapter-react";
 import { MoonIcon, SunIcon } from "@radix-ui/react-icons";
 import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { useWalletMultiButton } from '@solana/wallet-adapter-base-ui';
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuSeparator } from "@/components/ui/dropdown-menu"
+
 
 export default function Header() {
     const { setTheme } = useTheme()
+    const { publicKey, disconnect } = useWallet()
+    const [isConnected, setIsConnected] = useState<boolean>(false);
+
+    useEffect(() => {
+        if (publicKey) {
+            setIsConnected(true);
+        }
+        else {
+            setIsConnected(false);
+        }
+    }, [publicKey])
 
     return (
         <>
@@ -22,6 +39,7 @@ export default function Header() {
                     <div className="flex items-center gap-5">
                         <Link href="../discover">Discover</Link>
                         <Link href="../collections">Collections</Link>
+
                         <DropdownMenu>
                             <DropdownMenuTrigger asChild>
                                 <Button variant="outline" size="icon">
@@ -42,7 +60,45 @@ export default function Header() {
                                 </DropdownMenuItem>
                             </DropdownMenuContent>
                         </DropdownMenu>
-                        <WalletMultiButton />
+
+                        {isConnected ? (
+                            <>
+                                <DropdownMenu>
+                                    <DropdownMenuTrigger>
+                                        <Avatar>
+                                            {/* <AvatarImage src="https://github.com/shadcn.png" /> */}
+                                            <AvatarFallback>{publicKey?.toBase58().slice(0, 3)}</AvatarFallback>
+                                        </Avatar>
+                                    </DropdownMenuTrigger>
+                                    <DropdownMenuContent>
+                                        <DropdownMenuItem>
+                                            <Label>{publicKey?.toBase58().slice(0, 4) + '..' + publicKey?.toBase58().slice(-4)}</Label>
+                                        </DropdownMenuItem>
+                                        <DropdownMenuSeparator />
+                                        <Link href="../profile">
+                                            <DropdownMenuItem className="flex items-center gap-2 cursor-pointer">
+                                                <User size={18} />
+                                                Profile
+                                            </DropdownMenuItem>
+                                        </Link>
+                                        <Link href="../Leaderboard">
+                                            <DropdownMenuItem className="flex items-center gap-2 cursor-pointer">
+                                                <ListTree size={18} />
+                                                Leaderboard
+                                            </DropdownMenuItem>
+                                        </Link>
+                                        <DropdownMenuItem className="flex items-center gap-2 cursor-pointer" onClick={disconnect}>
+                                            <LogOut size={18} />
+                                            disconnect
+                                        </DropdownMenuItem>
+                                    </DropdownMenuContent>
+                                </DropdownMenu>
+                            </>
+                        ) : (
+                            <>
+                                <WalletMultiButton />
+                            </>
+                        )}
                     </div>
                 </div>
             </div>

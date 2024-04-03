@@ -15,7 +15,7 @@ import { ChevronLeftIcon, ChevronRightIcon } from "@radix-ui/react-icons";
 import SpinnerLoadingAnimation from "@/components/ui/spinnerLoadingAnimation";
 import { Card, CardContent, CardDescription, CardHeader, CardFooter, CardTitle } from "@/components/ui/card";
 
-export default function Home() {
+export default function CollectionPage() {
     const { publicKey } = useWallet();
     const [page, setPage] = useState(0);
     const [collections, setCollections] = useState<Grouping[]>([]);

@@ -9,9 +9,9 @@ import { User, LogOut, ListTree } from "lucide-react";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { MoonIcon, SunIcon } from "@radix-ui/react-icons";
 import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
-import { useWalletMultiButton } from '@solana/wallet-adapter-base-ui';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuSeparator } from "@/components/ui/dropdown-menu"
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuSeparator } from "@/components/ui/dropdown-menu";
 
 
 export default function Header() {
@@ -70,9 +70,13 @@ export default function Header() {
                                             <AvatarFallback>{publicKey?.toBase58().slice(0, 3)}</AvatarFallback>
                                         </Avatar>
                                     </DropdownMenuTrigger>
-                                    <DropdownMenuContent>
-                                        <DropdownMenuItem>
-                                            <Label>{publicKey?.toBase58().slice(0, 4) + '..' + publicKey?.toBase58().slice(-4)}</Label>
+                                    <DropdownMenuContent align="end">
+                                        <DropdownMenuItem className="cursor-pointer">
+                                            <Label
+                                                onClick={() => navigator.clipboard.writeText(publicKey?.toBase58()!)}
+                                            >
+                                                {publicKey?.toBase58().slice(0, 4) + '..' + publicKey?.toBase58().slice(-4)}
+                                            </Label>
                                         </DropdownMenuItem>
                                         <DropdownMenuSeparator />
                                         <Link href="../profile">

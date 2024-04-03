@@ -20,7 +20,7 @@ import { ChevronLeftIcon, ChevronRightIcon, DownloadIcon } from "@radix-ui/react
 import { Card, CardContent, CardDescription, CardHeader, CardFooter, CardTitle } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger, } from "@/components/ui/dialog";
 
-export default function SpecificCollectionPageHome({ params }: { params: { CollectionID: string }; }) {
+export default function SpecificCollectionPage({ params }: { params: { CollectionID: string }; }) {
     const perPage = 6;
     const { publicKey } = useWallet();
     const [page, setPage] = useState(0);
@@ -62,7 +62,7 @@ export default function SpecificCollectionPageHome({ params }: { params: { Colle
     return (
         <>
             <Room roomId={params.CollectionID}>
-                <CollaborativeApp collectionAddress={params.CollectionID}/>
+                <CollaborativeApp collectionAddress={params.CollectionID} />
             </Room>
             {
                 collectionNFTData?.slice(0, 1).map((nft, index) => (

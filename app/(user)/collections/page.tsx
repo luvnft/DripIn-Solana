@@ -14,14 +14,29 @@ import { ItemsResponse } from "@/types/SearchAssetsType";
 import { ChevronLeftIcon, ChevronRightIcon } from "@radix-ui/react-icons";
 import SpinnerLoadingAnimation from "@/components/ui/spinnerLoadingAnimation";
 import { Card, CardContent, CardDescription, CardHeader, CardFooter, CardTitle } from "@/components/ui/card";
+import { Command, CommandDialog, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList, CommandSeparator, CommandShortcut } from "@/components/ui/command"
+
 
 export default function CollectionPage() {
     const { publicKey } = useWallet();
     const [page, setPage] = useState(0);
+    const [open, setOpen] = useState(false);
     const [collections, setCollections] = useState<Grouping[]>([]);
     const [tokens, setTokens] = useState<ItemsResponse | null>(null);
 
     const perPage = 8;
+
+    useEffect(() => {
+        const down = (e: KeyboardEvent) => {
+            if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
+                e.preventDefault()
+                setOpen((open) => !open)
+            }
+        }
+
+        document.addEventListener("keydown", down)
+        return () => document.removeEventListener("keydown", down)
+    }, []);
 
     useEffect(() => {
         if (publicKey) {
@@ -56,6 +71,28 @@ export default function CollectionPage() {
     return (
         <>
             <title>{`SolSync - Collections`}</title>
+
+            <CommandDialog open={open} onOpenChange={setOpen}>
+                <Command>
+                    <CommandInput placeholder="Type a command or search..." />
+                    <CommandList>
+                        <CommandEmpty>No results found.</CommandEmpty>
+                        <CommandGroup heading="Collections">
+                            {collections.map((collection, index) => (
+                                <CommandItem
+                                    key={index}
+                                    onSelect={() => {
+                                        setOpen(false)
+                                        window.location.href = `./collections/${collection.group_value}`
+                                    }}
+                                >
+                                    {collection.collection_metadata.name}
+                                </CommandItem>
+                            ))}
+                        </CommandGroup>
+                    </CommandList>
+                </Command>
+            </CommandDialog>
 
             <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-2 gap-4 py-4">
                 <Card>

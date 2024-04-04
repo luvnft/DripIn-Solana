@@ -124,7 +124,7 @@ export default function SpecificCollectionPage({ params }: { params: { Collectio
                                                 <CardTitle>{nft.grouping[0].collection_metadata.name}</CardTitle>
                                                 <CardDescription>{nft.grouping[0].collection_metadata.description}</CardDescription>
                                             </CardHeader>
-                                            <CardContent className="grid grid-cols-2 gap-4">
+                                            <CardContent className="flex justify-between">
                                                 <CardContent className="p-0">
                                                     <CardTitle className="mb-2">Total NFTs</CardTitle>
                                                     {
@@ -139,8 +139,20 @@ export default function SpecificCollectionPage({ params }: { params: { Collectio
                                                         )
                                                     }
                                                 </CardContent>
-                                                <CardContent className="p-0 flex items-end justify-end">
-                                                    <Link href="#">
+                                                <CardContent className="p-0 flex flex-col gap-2 items-end justify-end">
+                                                    <Link href={`https://solana.fm/address/${params.CollectionID}`} target="_blank">
+                                                        <Button variant="secondary" className="flex items-center gap-2">
+                                                            <Image
+                                                                src="/SolanaFMLogo.svg"
+                                                                alt="Solana Logo Purple With Name"
+                                                                className="w-5"
+                                                                width={20}
+                                                                height={20}
+                                                            />
+                                                            View on Solana FM
+                                                        </Button>
+                                                    </Link>
+                                                    <Link href={`./${params.CollectionID}/${params.CollectionID}`}>
                                                         <Button className="flex items-center gap-2">
                                                             Join With Huddle01
                                                             <Video />

@@ -1,9 +1,6 @@
+import { ItemsResponse } from "@/types/SearchAssetsType";
 
-interface Tokens {
-    items: any[];
-}
-
-const fetchTokens = async (walletAddress: string): Promise<Tokens> => {
+const fetchTokens = async (walletAddress: string): Promise<ItemsResponse> => {
     const url = `https://mainnet.helius-rpc.com/?api-key=${process.env.NEXT_PUBLIC_HELIUS_API_KEY}` || "https://mainnet.helius-rpc.com";
     console.log(
         `Starting search for tokens for wallet address: ${walletAddress}`
@@ -35,7 +32,7 @@ const fetchTokens = async (walletAddress: string): Promise<Tokens> => {
         return { items: data.result };
     } catch (error) {
         console.error("Error fetching tokens:", error);
-        return { items: [] };
+        return { items: { total: 0, limit: 1000, cursor: "", items: [] } };
     }
 };
 

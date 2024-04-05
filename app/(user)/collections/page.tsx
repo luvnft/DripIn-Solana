@@ -11,10 +11,12 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Grouping } from "@/types/SearchAssetsType";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { ItemsResponse } from "@/types/SearchAssetsType";
+import dripCollectionAddress from "@/lib/drip/dripCollectionAddress";
 import { ChevronLeftIcon, ChevronRightIcon } from "@radix-ui/react-icons";
 import SpinnerLoadingAnimation from "@/components/ui/spinnerLoadingAnimation";
 import { Card, CardContent, CardDescription, CardHeader, CardFooter, CardTitle } from "@/components/ui/card";
 import { Command, CommandDialog, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList, CommandSeparator, CommandShortcut } from "@/components/ui/command"
+import { Item } from "@radix-ui/react-dropdown-menu";
 
 
 export default function CollectionPage() {
@@ -42,7 +44,8 @@ export default function CollectionPage() {
         if (publicKey) {
             const walletAddress = publicKey.toBase58();
             fetchTokens(walletAddress).then((data) => {
-                setTokens((data as unknown) as ItemsResponse);
+                const dripNFTs = data.items.items.filter(dripData => dripCollectionAddress.includes(dripData.grouping[0].group_value));
+                setTokens({ items: { total: dripNFTs.length, limit: 0, cursor: "", items: dripNFTs } });
             }).catch(console.error);
         }
         else {

@@ -61,9 +61,6 @@ export default function SpecificCollectionPage({ params }: { params: { Collectio
 
     return (
         <>
-            <Room roomId={params.CollectionID}>
-                <CollaborativeApp collectionAddress={params.CollectionID} />
-            </Room>
             {
                 collectionNFTData?.slice(0, 1).map((nft, index) => (
                     <title key={index}>
@@ -124,7 +121,7 @@ export default function SpecificCollectionPage({ params }: { params: { Collectio
                                                 <CardTitle>{nft.grouping[0].collection_metadata.name}</CardTitle>
                                                 <CardDescription>{nft.grouping[0].collection_metadata.description}</CardDescription>
                                             </CardHeader>
-                                            <CardContent className="flex justify-between">
+                                            <CardContent className="grid grid-cols-2 gap-2">
                                                 <CardContent className="p-0">
                                                     <CardTitle className="mb-2">Total NFTs</CardTitle>
                                                     {
@@ -139,9 +136,9 @@ export default function SpecificCollectionPage({ params }: { params: { Collectio
                                                         )
                                                     }
                                                 </CardContent>
-                                                <CardContent className="p-0 flex flex-col gap-2 items-end justify-end">
+                                                <CardContent className="p-0 flex justify-end">
                                                     <Link href={`https://solana.fm/address/${params.CollectionID}`} target="_blank">
-                                                        <Button variant="secondary" className="flex items-center gap-2">
+                                                        <Button variant="secondary">
                                                             <Image
                                                                 src="/SolanaFMLogo.svg"
                                                                 alt="Solana Logo Purple With Name"
@@ -152,13 +149,22 @@ export default function SpecificCollectionPage({ params }: { params: { Collectio
                                                             View on Solana FM
                                                         </Button>
                                                     </Link>
+                                                </CardContent>
+                                            </CardContent>
+                                            <CardContent className="flex justify-end">
+                                                <div className="flex flex-col gap-2 justify-end">
+                                                    <div className="flex justify-end">
+                                                        <Room roomId={params.CollectionID}>
+                                                            <CollaborativeApp collectionAddress={params.CollectionID} />
+                                                        </Room>
+                                                    </div>
                                                     <Link href={`./${params.CollectionID}/${params.CollectionID}`}>
                                                         <Button className="flex items-center gap-2">
                                                             Join With Huddle01
                                                             <Video />
                                                         </Button>
                                                     </Link>
-                                                </CardContent>
+                                                </div>
                                             </CardContent>
                                         </Card>
                                     </Card>

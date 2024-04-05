@@ -11,6 +11,8 @@
   "dependencies": {
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.0",
+    "@huddle01/react": "^2.0.8",
+    "@huddle01/server-sdk": "^2.2.2",
     "@liveblocks/client": "^1.11.0",
     "@liveblocks/react": "^1.11.0",
     "@radix-ui/react-avatar": "^1.0.4",
@@ -36,7 +38,8 @@
     "react": "^18",
     "react-dom": "^18",
     "tailwind-merge": "^2.2.2",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "tweetnacl": "^1.0.3"
   },
   "devDependencies": {
     "@types/node": "^20",

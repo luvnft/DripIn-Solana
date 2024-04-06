@@ -4,7 +4,7 @@ import { SigninMessage } from "@/lib/huddle01/SignInMessage";
 import { AccessToken, Role } from "@huddle01/server-sdk/auth";
 import { ItemsResponseForHuddle } from "@/types/SearchAssetsType";
 
-export default async function GET(req: NextRequest, res: Response) {
+export async function GET(req: NextRequest, res: Response) {
     const { roomId, address, displayName, expirationTime, signature, domain } = req.body as unknown as {
         roomId: string;
         address: string;

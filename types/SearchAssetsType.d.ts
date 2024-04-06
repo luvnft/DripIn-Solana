@@ -104,3 +104,10 @@ export interface ItemsResponse {
         items: Item[];
     };
 }
+
+export interface ItemsResponseForHuddle {
+    total: number;
+    limit: number;
+    cursor: string;
+    items: Item[];
+}

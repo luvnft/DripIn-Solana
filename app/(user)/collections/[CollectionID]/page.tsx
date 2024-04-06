@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Video } from "lucide-react";
 import { ArrowRight } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import fetchTokens from "@/lib/searchAssets";
 import { Badge } from "@/components/ui/badge";
@@ -22,6 +23,7 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, Di
 
 export default function SpecificCollectionPage({ params }: { params: { CollectionID: string }; }) {
     const perPage = 6;
+    const router = useRouter();
     const { publicKey } = useWallet();
     const [page, setPage] = useState(0);
     const [tokens, setTokens] = useState<ItemsResponse | null>(null);
@@ -158,12 +160,17 @@ export default function SpecificCollectionPage({ params }: { params: { Collectio
                                                             <CollaborativeApp collectionAddress={params.CollectionID} />
                                                         </Room>
                                                     </div>
-                                                    <Link href={`./${params.CollectionID}/${params.CollectionID}`}>
-                                                        <Button className="flex items-center gap-2">
-                                                            Join With Huddle01
-                                                            <Video />
-                                                        </Button>
-                                                    </Link>
+                                                    <Button
+                                                        className="flex items-center gap-2"
+                                                        onClick={async () => {
+                                                            const apiResponse = await fetch(`/api/createRoom?collectionAddress=${params.CollectionID}`);
+                                                            const { roomId } = await apiResponse.json();
+                                                            router.push(`./${params.CollectionID}/${roomId}`);
+                                                        }}
+                                                    >
+                                                        Join With Huddle01
+                                                        <Video />
+                                                    </Button>
                                                 </div>
                                             </CardContent>
                                         </Card>

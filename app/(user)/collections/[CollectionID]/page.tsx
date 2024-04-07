@@ -11,6 +11,7 @@ import { Badge } from "@/components/ui/badge";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Item } from "@/types/SearchAssetsType";
+import { createRoom } from "@/actions/createRoom";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Room } from "@/components/liveblocks/Room";
 import { ItemsResponse } from "@/types/SearchAssetsType";
@@ -163,9 +164,8 @@ export default function SpecificCollectionPage({ params }: { params: { Collectio
                                                     <Button
                                                         className="flex items-center gap-2"
                                                         onClick={async () => {
-                                                            const apiResponse = await fetch(`/api/createRoom?collectionAddress=${params.CollectionID}`);
-                                                            const { roomId } = await apiResponse.json();
-                                                            router.push(`./${params.CollectionID}/${roomId}`);
+                                                            const roomId = await createRoom();
+                                                            router.push(`./${params.CollectionID}/${roomId}/lobby`);
                                                         }}
                                                     >
                                                         Join With Huddle01
@@ -325,7 +325,7 @@ export default function SpecificCollectionPage({ params }: { params: { Collectio
                     {/* {collectionNFTData?.length} */}
                     {/* <pre>{JSON.stringify(collectionNFTData, null, 2)}</pre> */}
                 </div>
-            </div>
+            </div >
         </>
     );
 }

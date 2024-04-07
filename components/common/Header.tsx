@@ -35,7 +35,7 @@ export default function Header() {
                     </Link>
 
                     <div className="flex items-center gap-5">
-                        <Link href="../discover">Discover</Link>
+                        {/* <Link href="../discover">Discover</Link> */}
                         <Link href="../collections">Collections</Link>
 
                         <DropdownMenu>
@@ -77,12 +77,12 @@ export default function Header() {
                                             <Label>{publicKey?.toBase58().slice(0, 4) + '..' + publicKey?.toBase58().slice(-4)}</Label>
                                         </DropdownMenuItem>
                                         <DropdownMenuSeparator />
-                                        <Link href="../profile">
+                                        {/* <Link href="../profile">
                                             <DropdownMenuItem className="flex items-center gap-2 cursor-pointer">
                                                 <User size={18} />
                                                 Profile
                                             </DropdownMenuItem>
-                                        </Link>
+                                        </Link> */}
                                         <DropdownMenuItem className="flex items-center gap-2 cursor-pointer" onClick={disconnect}>
                                             <LogOut size={18} />
                                             disconnect

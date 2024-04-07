@@ -21,19 +21,14 @@ const RemotePeer = ({ peerId }: RemotePeerProps) => {
         <GridContainer
             className={clsx(isScreenShared ? 'w-full h-full my-3 mx-1' : '')}
         >
-            {metadata?.isHandRaised && (
-                <span className='absolute top-4 right-4 text-4xl text-gray-200 font-medium'>
-                    ✋
-                </span>
-            )}
             {videoStream ? (
                 <PersonVideo stream={videoStream} name={metadata?.displayName ?? 'guest'} />
             ) : (
-                <div className='flex text-3xl font-semibold items-center justify-center w-24 h-24 bg-gray-700 text-gray-200 rounded-full'>
+                <div className='flex text-3xl font-semibold items-center justify-center w-24 h-24 bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-100 rounded-full'>
                     {metadata?.displayName?.[0].toUpperCase()}
                 </div>
             )}
-            <span className='absolute bottom-4 left-4 text-gray-200 font-medium'>
+            <span className='absolute bottom-4 left-4 text-slate-800 dark:text-slate-100 font-medium'>
                 {metadata?.displayName}
             </span>
             {audioStream && (

@@ -135,18 +135,16 @@ export default function Huddle01RoomPage({ params }: { params: { Huddle01Room: s
                     <CardDescription>SolSync Room: {params.Huddle01Room}</CardDescription>
                 </CardHeader>
 
-                <Card className="w-full max-w-[90%] mx-auto py-6 bg-slate-100 dark:bg-slate-900">
+                <div className="w-full max-w-[90%] mx-auto py-6">
                     {shareStream && (
-                        // <div className='w-3/4'>
-                            <GridContainer className='w-full h-full'>
-                                <>
-                                    <PersonVideo
-                                        stream={videoTrack && new MediaStream([videoTrack])}
-                                        name={metadata?.displayName ?? 'guest'}
-                                    />
-                                </>
-                            </GridContainer>
-                        // </div>
+                        <GridContainer className='w-full h-full'>
+                            <>
+                                <PersonVideo
+                                    stream={videoTrack && new MediaStream([videoTrack])}
+                                    name={metadata?.displayName ?? 'guest'}
+                                />
+                            </>
+                        </GridContainer>
                     )}
                     {peerIds.map((peerId) => (
                         <RemoteScreenShare key={peerId} peerId={peerId} />
@@ -165,11 +163,6 @@ export default function Huddle01RoomPage({ params }: { params: { Huddle01Room: s
                                     isScreenShared ? 'w-full h-full my-3 mx-1' : ''
                                 )}
                             >
-                                {metadata?.isHandRaised && (
-                                    <span className='absolute top-4 right-4 text-4xl text-gray-200 font-medium'>
-                                        ✋
-                                    </span>
-                                )}
                                 {stream ? (
                                     <>
                                         <PersonVideo
@@ -178,11 +171,11 @@ export default function Huddle01RoomPage({ params }: { params: { Huddle01Room: s
                                         />
                                     </>
                                 ) : (
-                                    <div className='flex text-3xl font-semibold items-center justify-center w-24 h-24 bg-gray-700 text-gray-200 rounded-full'>
+                                    <div className='flex text-3xl font-semibold items-center justify-center w-24 h-24 bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-100 rounded-full'>
                                         {name[0]?.toUpperCase()}
                                     </div>
                                 )}
-                                <span className='absolute bottom-4 left-4 text-gray-200 font-medium'>
+                                <span className='absolute bottom-4 left-4 text-slate-800 dark:text-slate-100 font-medium'>
                                     {`${metadata?.displayName} (You)`}
                                 </span>
                             </GridContainer>
@@ -191,7 +184,7 @@ export default function Huddle01RoomPage({ params }: { params: { Huddle01Room: s
                             <RemotePeer key={peerId} peerId={peerId} />
                         ))}
                     </section>
-                </Card>
+                </div>
 
                 <CardFooter className="w-full flex justify-between pt-6 border-t-[1px] rounded-md mt-6">
                     <CardContent className="flex gap-4 pb-0">
@@ -235,6 +228,10 @@ export default function Huddle01RoomPage({ params }: { params: { Huddle01Room: s
                             variant={isScreenShared ? "destructive" : "outline"}
                             onClick={() => {
                                 if (isScreenShared) {
+                                    // if (shareStream !== null) {
+                                    //     toast.error('Only one screen share is allowed at a time');
+                                    //     return;
+                                    // }
                                     stopScreenShare();
                                 }
                                 else {

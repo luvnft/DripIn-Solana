@@ -4,6 +4,7 @@ import "./globals.css";
 import "@/style/SolanaWallet.css";
 import React, { useMemo } from "react";
 import { Sora } from "next/font/google";
+import { Toaster } from 'react-hot-toast';
 import NextTopLoader from 'nextjs-toploader';
 import Header from "@/components/common/Header";
 import Footer from "@/components/common/Footer";
@@ -11,7 +12,6 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { PhantomWalletAdapter } from "@solana/wallet-adapter-wallets";
 import { WalletModalProvider } from "@solana/wallet-adapter-react-ui";
 import { ConnectionProvider, WalletProvider } from "@solana/wallet-adapter-react";
-
 
 const sora = Sora({ subsets: ["latin"] });
 
@@ -33,6 +33,7 @@ export default function RootLayout({
                     <WalletProvider wallets={wallets} autoConnect>
                         <WalletModalProvider>
                             <>
+                                <Toaster position="top-center" />
                                 <ThemeProvider
                                     attribute="class"
                                     defaultTheme="system"

@@ -1,5 +1,5 @@
-import React, { useEffect, useRef } from 'react';
-import { useStudioState } from '@/lib/huddle01/studio/studioState';
+import React, { useEffect, useRef } from "react";
+import { useStudioState } from "@/lib/huddle01/studio/studioState";
 
 interface IAudioProps {
     stream: MediaStream;
@@ -33,7 +33,7 @@ const Audio: React.FC<
                 }
             };
             audioObj.onerror = () => {
-                console.error('audioCard() | Error is hapenning...');
+                console.error("audioCard() | Error is hapenning...");
             };
         }
     }, []);

@@ -73,7 +73,7 @@ export default function CollectionPage() {
 
     return (
         <>
-            <title>{`SolSync - Collections`}</title>
+            <title>{`DripIn - Collections`}</title>
 
             <CommandDialog open={open} onOpenChange={setOpen}>
                 <Command>

@@ -1,21 +1,21 @@
 "use client";
 
-import clsx from 'clsx';
-import toast from 'react-hot-toast';
+import clsx from "clsx";
+import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Role } from "@huddle01/server-sdk/auth";
 import { PeerMetadata } from "@/types/huddle01Type";
 import { useEffect, useRef, useState } from "react";
-import RemotePeer from '@/components/huddle01/remotePeer';
+import RemotePeer from "@/components/huddle01/remotePeer";
 import PersonVideo from "@/components/huddle01/media/Video";
 import ChangeDevice from "@/components/huddle01/changeDevice";
 import GridContainer from "@/components/huddle01/GridContainer";
 import { useStudioState } from "@/lib/huddle01/studio/studioState";
-import RemoteScreenShare from '@/components/huddle01/remoteScreenShare';
+import RemoteScreenShare from "@/components/huddle01/remoteScreenShare";
 import PeerData from "@/components/huddle01/Sidebar/PersonData/peerData";
-import ChatsData from '@/components/huddle01/Sidebar/ChatData/ChatsData';
+import ChatsData from "@/components/huddle01/Sidebar/ChatData/ChatsData";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Video, VideoOff, Mic, MicOff, Volume2, Monitor, MonitorStop, Users, MessageSquareText, PhoneOff, SendHorizontal } from "lucide-react";
@@ -23,7 +23,7 @@ import { useDataMessage, useDevices, useLocalAudio, useLocalMedia, useLocalPeer,
 
 export default function Huddle01RoomPage({ params }: { params: { Huddle01Room: string }; }) {
     const { sendData } = useDataMessage();
-    const [message, setMessage] = useState('');
+    const [message, setMessage] = useState("");
     const { requestedPeers } = useStudioState();
     const { isVideoOn, enableVideo, disableVideo, stream } = useLocalVideo();
     const { isAudioOn, enableAudio, disableAudio, stream: audioStream } = useLocalAudio();
@@ -136,18 +136,18 @@ export default function Huddle01RoomPage({ params }: { params: { Huddle01Room: s
 
     const sendMessage = () => {
         sendData({
-            to: '*',
+            to: "*",
             payload: JSON.stringify({
                 message,
                 name: metadata?.displayName,
             }),
-            label: 'chat',
+            label: "chat",
         });
-        setMessage('');
+        setMessage("");
     };
 
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-        if (e.key === 'Enter') {
+        if (e.key === "Enter") {
             sendMessage();
         }
     };
@@ -157,16 +157,16 @@ export default function Huddle01RoomPage({ params }: { params: { Huddle01Room: s
             <Card className="mt-6 mb-3">
                 <CardHeader className="w-full border-b-[1px] rounded-md mb-6">
                     <CardTitle className="font-normal text-lg">Username: {name}</CardTitle>
-                    <CardDescription>SolSync Room: {params.Huddle01Room}</CardDescription>
+                    <CardDescription>DripIn Room: {params.Huddle01Room}</CardDescription>
                 </CardHeader>
 
                 <div className="w-full max-w-[90%] mx-auto py-6">
                     {shareStream && (
-                        <GridContainer className='w-full h-full'>
+                        <GridContainer className="w-full h-full">
                             <>
                                 <PersonVideo
                                     stream={videoTrack && new MediaStream([videoTrack])}
-                                    name={metadata?.displayName ?? 'guest'}
+                                    name={metadata?.displayName ?? "guest"}
                                 />
                             </>
                         </GridContainer>
@@ -176,31 +176,31 @@ export default function Huddle01RoomPage({ params }: { params: { Huddle01Room: s
                     ))}
                     <section
                         className={clsx(
-                            'justify-center px-4',
+                            "justify-center px-4",
                             isScreenShared
-                                ? 'flex flex-col w-1/4'
-                                : 'flex flex-wrap gap-4 w-full'
+                                ? "flex flex-col w-1/4"
+                                : "flex flex-wrap gap-4 w-full"
                         )}
                     >
                         {role !== Role.BOT && (
                             <GridContainer
                                 className={clsx(
-                                    isScreenShared ? 'w-full h-full my-3 mx-1' : ''
+                                    isScreenShared ? "w-full h-full my-3 mx-1" : ""
                                 )}
                             >
                                 {stream ? (
                                     <>
                                         <PersonVideo
                                             stream={stream}
-                                            name={metadata?.displayName ?? 'guest'}
+                                            name={metadata?.displayName ?? "guest"}
                                         />
                                     </>
                                 ) : (
-                                    <div className='flex text-3xl font-semibold items-center justify-center w-24 h-24 bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-100 rounded-full'>
+                                    <div className="flex text-3xl font-semibold items-center justify-center w-24 h-24 bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-100 rounded-full">
                                         {name[0]?.toUpperCase()}
                                     </div>
                                 )}
-                                <span className='absolute bottom-4 left-4 text-slate-800 dark:text-slate-100 font-medium'>
+                                <span className="absolute bottom-4 left-4 text-slate-800 dark:text-slate-100 font-medium">
                                     {`${metadata?.displayName} (You)`}
                                 </span>
                             </GridContainer>
@@ -254,7 +254,7 @@ export default function Huddle01RoomPage({ params }: { params: { Huddle01Room: s
                             onClick={() => {
                                 if (isScreenShared) {
                                     // if (shareStream !== null) {
-                                    //     toast.error('Only one screen share is allowed at a time');
+                                    //     toast.error("Only one screen share is allowed at a time");
                                     //     return;
                                     // }
                                     stopScreenShare();
@@ -293,15 +293,15 @@ export default function Huddle01RoomPage({ params }: { params: { Huddle01Room: s
                                 <SheetHeader>
                                     <SheetTitle>Messages</SheetTitle>
                                 </SheetHeader>
-                                <div className='flex flex-col h-full py-4'>
-                                    <div className='flex-1 p-2 overflow-y-auto'>
+                                <div className="flex flex-col h-full py-4">
+                                    <div className="flex-1 p-2 overflow-y-auto">
                                         <ChatsData />
                                     </div>
-                                    <div className='p-2 rounded-b-lg'>
-                                        <div className='flex gap-2'>
+                                    <div className="p-2 rounded-b-lg">
+                                        <div className="flex gap-2">
                                             <Input
-                                                className='flex-1'
-                                                placeholder='Type your message'
+                                                className="flex-1"
+                                                placeholder="Type your message"
                                                 onChange={(e) => setMessage(e.target.value)}
                                                 value={message}
                                                 onKeyDown={handleKeyDown}

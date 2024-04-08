@@ -1,7 +1,7 @@
 "use client";
 
 import { FC, use } from "react";
-import { BasicIcons } from '@/utils/BasicIcons';
+import { Check } from 'lucide-react';
 import { useDevices } from "@huddle01/react/hooks";
 import { useStudioState } from "@/lib/huddle01/studio/studioState";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
@@ -51,13 +51,13 @@ const ChangeDevice: FC<ChangeDeviceProps> = ({ children, deviceType }) => {
                                 <span>
                                     {deviceType === "mic" &&
                                         audioInputDevice?.label === device.label &&
-                                        BasicIcons.selected}
+                                        (<Check />)}
                                     {deviceType === "cam" &&
                                         videoDevice?.label === device.label &&
-                                        BasicIcons.selected}
+                                        (<Check />)}
                                     {deviceType === "speaker" &&
                                         audioOutputDevice?.label === device.label &&
-                                        BasicIcons.selected}
+                                        (<Check />)}
                                 </span>
                                 {device.label}
                             </button>

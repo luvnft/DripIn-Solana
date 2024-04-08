@@ -7,7 +7,7 @@ import { Sora } from "next/font/google";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useWallet } from "@solana/wallet-adapter-react";
-import { HuddleClient, HuddleProvider } from '@huddle01/react';
+import { HuddleClient, HuddleProvider } from "@huddle01/react";
 
 const sora = Sora({ subsets: ["latin"] });
 

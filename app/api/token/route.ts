@@ -1,6 +1,6 @@
-import { AccessToken, Role } from '@huddle01/server-sdk/auth';
+import { AccessToken, Role } from "@huddle01/server-sdk/auth";
 
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 
 const createToken = async (
     roomId: string,
@@ -40,11 +40,11 @@ const createToken = async (
 export async function GET(request: Request) {
     const { searchParams } = new URL(request.url);
 
-    const roomId = searchParams.get('roomId');
-    const displayName = searchParams.get('displayName');
+    const roomId = searchParams.get("roomId");
+    const displayName = searchParams.get("displayName");
 
     if (!roomId || !displayName) {
-        return new Response('Invalid Request', { status: 400 });
+        return new Response("Invalid Request", { status: 400 });
     }
 
     let token: string;
@@ -54,7 +54,7 @@ export async function GET(request: Request) {
             `https://iriko.huddle01.media/api/v1/live-meeting/preview-peers?roomId=${roomId}`,
             {
                 headers: {
-                    'x-api-key': process.env.API_KEY ?? '',
+                    "x-api-key": process.env.API_KEY ?? "",
                 },
             }
         );

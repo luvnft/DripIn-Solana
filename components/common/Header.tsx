@@ -7,8 +7,8 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { MoonIcon, SunIcon } from "@radix-ui/react-icons";
-import { Copy, User, LogOut } from "lucide-react";
-import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
+import { Copy, LogOut } from "lucide-react";
+import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuSeparator } from "@/components/ui/dropdown-menu";
 
@@ -31,7 +31,7 @@ export default function Header() {
             <div className="w-full border-b">
                 <div className="max-w-[95vw] w-full px-3 xl:p-0 my-5 mx-auto flex justify-between items-center">
                     <Link href="../" className="cursor-pointer">
-                        <Label className="text-2xl cursor-pointer">SolSync</Label>
+                        <Label className="text-2xl cursor-pointer">DripIn</Label>
                     </Link>
 
                     <div className="flex items-center gap-5">
@@ -74,7 +74,7 @@ export default function Header() {
                                             onClick={() => navigator.clipboard.writeText(publicKey?.toBase58()!)}
                                         >
                                             <Copy size={18} />
-                                            <Label>{publicKey?.toBase58().slice(0, 4) + '..' + publicKey?.toBase58().slice(-4)}</Label>
+                                            <Label>{publicKey?.toBase58().slice(0, 4) + ".." + publicKey?.toBase58().slice(-4)}</Label>
                                         </DropdownMenuItem>
                                         <DropdownMenuSeparator />
                                         {/* <Link href="../profile">

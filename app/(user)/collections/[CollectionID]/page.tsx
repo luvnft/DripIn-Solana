@@ -67,7 +67,7 @@ export default function SpecificCollectionPage({ params }: { params: { Collectio
             {
                 collectionNFTData?.slice(0, 1).map((nft, index) => (
                     <title key={index}>
-                        {`${nft.grouping[0].collection_metadata.name} - Collections | SolSync`}
+                        {`${nft.grouping[0].collection_metadata.name} - Collections | DripIn`}
                     </title>
                 ))
             }

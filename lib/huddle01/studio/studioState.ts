@@ -1,4 +1,4 @@
-import { create } from 'zustand';
+import { create } from "zustand";
 
 export interface IChatMessage {
     name: string;
@@ -61,7 +61,7 @@ interface StudioState {
 }
 
 export const useStudioState = create<StudioState>((set) => ({
-    name: '',
+    name: "",
     setName: (name) => set({ name }),
     isChatOpen: false,
     setIsChatOpen: (isChatOpen) => {
@@ -125,9 +125,9 @@ export const useStudioState = create<StudioState>((set) => ({
             chatMessages: [...state.chatMessages, val],
         }));
     },
-    activeBg: 'bg-black',
+    activeBg: "bg-black",
     setActiveBg: (val: string) => set({ activeBg: val }),
-    boxPosition: { x: 0, y: 0, width: '200', height: '200' },
+    boxPosition: { x: 0, y: 0, width: "200", height: "200" },
     setBoxPosition: (val: BoxPosition) => set({ boxPosition: val }),
     isRecording: false,
     setIsRecording: (val: boolean) => set({ isRecording: val }),

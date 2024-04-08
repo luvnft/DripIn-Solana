@@ -1,5 +1,5 @@
-import React, { useEffect, useRef } from 'react';
-import { useStudioState } from '@/lib/huddle01/studio/studioState';
+import React, { useEffect, useRef } from "react";
+import { useStudioState } from "@/lib/huddle01/studio/studioState";
 
 interface VideoProps {
     stream: MediaStream | null;
@@ -29,7 +29,7 @@ const PersonVideo = ({ stream, name }: VideoProps) => {
     return (
         <>
             <video
-                className='rounded-lg object-cover aspect-video'
+                className="rounded-lg object-cover aspect-video"
                 ref={videoRef}
                 autoPlay
                 muted

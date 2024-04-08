@@ -4,8 +4,8 @@ import "./globals.css";
 import "@/style/SolanaWallet.css";
 import React, { useMemo } from "react";
 import { Sora } from "next/font/google";
-import { Toaster } from 'react-hot-toast';
-import NextTopLoader from 'nextjs-toploader';
+import { Toaster } from "react-hot-toast";
+import NextTopLoader from "nextjs-toploader";
 import Header from "@/components/common/Header";
 import Footer from "@/components/common/Footer";
 import { ThemeProvider } from "@/components/theme-provider";
@@ -26,7 +26,7 @@ export default function RootLayout({
     return (
         <html lang="en">
             <head>
-                <title>SolSync</title>
+                <title>DripIn</title>
             </head>
             <body className={`${sora.className}`}>
                 <ConnectionProvider endpoint={endpoint}>

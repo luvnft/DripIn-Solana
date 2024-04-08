@@ -4,7 +4,7 @@ export const createRoom = async () => {
     const response = await fetch("https://api.huddle01.com/api/v1/create-room", {
         method: "POST",
         body: JSON.stringify({
-            title: "SolSync Room",
+            title: "DripIn Room",
         }),
         headers: {
             "Content-type": "application/json",

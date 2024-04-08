@@ -18,9 +18,9 @@ import PeerData from "@/components/huddle01/Sidebar/PersonData/peerData";
 import ChatsData from "@/components/huddle01/Sidebar/ChatData/ChatsData";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Video, VideoOff, Mic, MicOff, Volume2, Monitor, MonitorStop, Users, MessageSquareText, PhoneOff, SendHorizontal } from "lucide-react";
 import { useDataMessage, useDevices, useLocalAudio, useLocalMedia, useLocalPeer, useLocalScreenShare, useLocalVideo, usePeerIds, useRoom } from "@huddle01/react/hooks";
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";
 
 export default function Huddle01RoomPage({ params }: { params: { Huddle01Room: string }; }) {
     const router = useRouter();
@@ -212,20 +212,24 @@ export default function Huddle01RoomPage({ params }: { params: { Huddle01Room: s
 
                 <CardFooter className="w-full flex justify-between pt-6 border-t-[1px] rounded-md mt-6">
                     <CardContent className="flex gap-4 pb-0">
-                        <Dialog>
-                            <DialogTrigger>
+                        <AlertDialog>
+                            <AlertDialogTrigger>
                                 <Button variant="destructive">
                                     <PhoneOff />
                                 </Button>
-                            </DialogTrigger>
-                            <DialogContent>
-                                <DialogHeader>
-                                    <DialogTitle>are you sure to want to leave this Call?</DialogTitle>
-                                </DialogHeader>
-                                <Button onClick={leaveRoom}>Yes</Button>
-                                <Button>No</Button>
-                            </DialogContent>
-                        </Dialog>
+                            </AlertDialogTrigger>
+                            <AlertDialogContent>
+                                <AlertDialogHeader>
+                                    <AlertDialogTitle>Do you want to leave?</AlertDialogTitle>
+                                </AlertDialogHeader>
+                                <AlertDialogFooter>
+                                    <AlertDialogCancel>Continue</AlertDialogCancel>
+                                    <Button variant="destructive" onClick={leaveRoom}>
+                                        Yes
+                                    </Button>
+                                </AlertDialogFooter>
+                            </AlertDialogContent>
+                        </AlertDialog>
                     </CardContent>
                     <CardContent className="flex gap-4 pb-0">
                         <ChangeDevice deviceType="cam">

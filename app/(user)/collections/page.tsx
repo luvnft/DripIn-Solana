@@ -71,7 +71,7 @@ export default function CollectionPage() {
 
     return (
         <>
-            <title>{`DripIn - Collections`}</title>
+            <title>{`DripIN - Collections`}</title>
 
             <CommandDialog open={open} onOpenChange={setOpen}>
                 <Command>

@@ -3,6 +3,7 @@
 import clsx from 'clsx';
 import toast from 'react-hot-toast';
 import { useRouter } from "next/navigation";
+import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Role } from "@huddle01/server-sdk/auth";
 import { PeerMetadata } from "@/types/huddle01Type";
@@ -13,12 +14,17 @@ import ChangeDevice from "@/components/huddle01/changeDevice";
 import GridContainer from "@/components/huddle01/GridContainer";
 import { useStudioState } from "@/lib/huddle01/studio/studioState";
 import RemoteScreenShare from '@/components/huddle01/remoteScreenShare';
+import PeerData from "@/components/huddle01/Sidebar/PersonData/peerData";
+import ChatsData from '@/components/huddle01/Sidebar/ChatData/ChatsData';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Video, VideoOff, Mic, MicOff, Volume2, Monitor, MonitorStop, Users, MessageSquareText, PhoneOff } from "lucide-react";
+import { Video, VideoOff, Mic, MicOff, Volume2, Monitor, MonitorStop, Users, MessageSquareText, PhoneOff, SendHorizontal } from "lucide-react";
 import { useDataMessage, useDevices, useLocalAudio, useLocalMedia, useLocalPeer, useLocalScreenShare, useLocalVideo, usePeerIds, useRoom } from "@huddle01/react/hooks";
 
 export default function Huddle01RoomPage({ params }: { params: { Huddle01Room: string }; }) {
+    const { sendData } = useDataMessage();
+    const [message, setMessage] = useState('');
+    const { requestedPeers } = useStudioState();
     const { isVideoOn, enableVideo, disableVideo, stream } = useLocalVideo();
     const { isAudioOn, enableAudio, disableAudio, stream: audioStream } = useLocalAudio();
     const { fetchStream } = useLocalMedia();
@@ -126,6 +132,25 @@ export default function Huddle01RoomPage({ params }: { params: { Huddle01Room: s
                 }
             },
         });
+
+
+    const sendMessage = () => {
+        sendData({
+            to: '*',
+            payload: JSON.stringify({
+                message,
+                name: metadata?.displayName,
+            }),
+            label: 'chat',
+        });
+        setMessage('');
+    };
+
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === 'Enter') {
+            sendMessage();
+        }
+    };
 
     return (
         <>
@@ -251,6 +276,13 @@ export default function Huddle01RoomPage({ params }: { params: { Huddle01Room: s
                                 <SheetHeader>
                                     <SheetTitle>Users</SheetTitle>
                                 </SheetHeader>
+                                <div className="mb-6">
+                                    <div className="flex flex-col gap-2 mt-2 px-4 py-2">
+                                        {peerIds.map((peerId) => (
+                                            <PeerData peerId={peerId} key={peerId} />
+                                        ))}
+                                    </div>
+                                </div>
                             </SheetContent>
                         </Sheet>
                         <Sheet>
@@ -261,6 +293,25 @@ export default function Huddle01RoomPage({ params }: { params: { Huddle01Room: s
                                 <SheetHeader>
                                     <SheetTitle>Messages</SheetTitle>
                                 </SheetHeader>
+                                <div className='flex flex-col h-full py-4'>
+                                    <div className='flex-1 p-2 overflow-y-auto'>
+                                        <ChatsData />
+                                    </div>
+                                    <div className='p-2 rounded-b-lg'>
+                                        <div className='flex gap-2'>
+                                            <Input
+                                                className='flex-1'
+                                                placeholder='Type your message'
+                                                onChange={(e) => setMessage(e.target.value)}
+                                                value={message}
+                                                onKeyDown={handleKeyDown}
+                                            />
+                                            <Button onClick={sendMessage} variant="secondary">
+                                                <SendHorizontal />
+                                            </Button>
+                                        </div>
+                                    </div>
+                                </div>
                             </SheetContent>
                         </Sheet>
                     </CardContent>

@@ -5,7 +5,7 @@ export default function Footer() {
         <footer className="w-full mt-auto">
             <div className="mt-4 border-t py-6 text-black dark:text-white">
                 <Label className="flex items-center text-center justify-center w-full max-w-[95vw] mx-auto">
-                    Made with ❤️ DripIn
+                    Made with ❤️ DripIN
                 </Label>
             </div>
         </footer>

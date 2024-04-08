@@ -8,7 +8,7 @@ export default function Home() {
     return (
         <>
             <div className="flex flex-col items-center justify-center min-h-[90vh]">
-                <Label className="text-6xl">DripIn Revolutionizes Social</Label>
+                <Label className="text-6xl">DripIN Revolutionizes Social</Label>
                 <Label className="text-xl">Where community syncs, creators thrive, and tokens unlock the future of social connectivity.</Label>
                 <div className="my-20 p-6 flex flex-col gap-4 items-center justify-center bg-slate-300 dark:bg-slate-800 rounded-lg">
                     <Label className="text-4xl">Built on</Label>

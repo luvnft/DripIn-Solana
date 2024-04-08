@@ -32,8 +32,8 @@ export default function Header() {
             <div className="w-full border-b">
                 <div className="max-w-[95vw] w-full px-3 xl:p-0 my-5 mx-auto flex justify-between items-center">
                     <Link href="../" className="cursor-pointer flex items-center gap-4">
-                        <Image src="/Logo.webp" alt="DripIn Logo" width={256} height={256} className="w-12 h-12" />
-                        <Label className="text-2xl cursor-pointer">DripIn</Label>
+                        <Image src="/favicon.webp" alt="DripIN Logo" width={256} height={256} className="w-12 h-12" />
+                        <Label className="text-2xl cursor-pointer">DripIN</Label>
                     </Link>
 
                     <div className="flex items-center gap-5">

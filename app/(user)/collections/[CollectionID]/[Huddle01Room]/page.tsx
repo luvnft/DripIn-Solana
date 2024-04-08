@@ -156,7 +156,7 @@ export default function Huddle01RoomPage({ params }: { params: { Huddle01Room: s
             <Card className="mt-6 mb-3">
                 <CardHeader className="w-full border-b-[1px] rounded-md mb-6">
                     <CardTitle className="font-normal text-lg">Username: {name}</CardTitle>
-                    <CardDescription>DripIn Room: {params.Huddle01Room}</CardDescription>
+                    <CardDescription>DripIN Room: {params.Huddle01Room}</CardDescription>
                 </CardHeader>
 
                 <div className="w-full max-w-[90%] mx-auto py-6">

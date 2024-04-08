@@ -1,36 +1,84 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# DripIN
 
-## Getting Started
+DripIN links Drip NFT enthusiasts globally, serving as a vibrant community hub. Our platform brings together collectors of Drip NFTs, facilitating easy connections between those with share same Drip NFT collections through seamless video chats. With DripIN, community building has never been easier or more efficient. A more interactive community-building tool is here for all Drip NFT fanatics.
 
-First, run the development server:
+# The Setbacks
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- Lack of community tools for NFT collectors.
+- Dormant Drip NFTs in wallets.
+- Limited connectivity for Drip NFT enthusiasts.
+- Scarcity of platforms enabling Drip NFT enthusiasts to connect based on shared interests.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+# How DripIN Solves It
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Discover fellow enthusiasts who share your passion for specific Drip NFT collections.
+- Connect easily through personalized video chats within the platform.
+- Forge connections based on shared love for Drip NFT collections.
+- Engage in meaningful conversations and enhance your Drip NFT experience through video chats.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+# TechStack
 
-## Learn More
+Web: `Next.js` `Tailwind css`
 
-To learn more about Next.js, take a look at the following resources:
+# Snapshots
+<table>
+  <tr>
+    <td align="center">
+      <img src="https://lh3.googleusercontent.com/pw/AP1GczMRJSL98WUFn-Qj2IGU4XBJCNDVWrP8EjvaGY9WU0CrTWYLtZRDlZaVIjJx28Jfu-psU_HpYPYjhzkwUlGCIqaZFMs5S7f8Uvo44yn2GT--fppGbfMb2uwU9XEbe9L_pijxMdGRDMoInQlpdNvK1_pzSJIdGB-GOnVZTSAgq3ilyUyQNqj86ByTdeRc2_NE3iplvnlmeyk2tQd9wuxykcgJjt2DpHCjoGrSVi3QdP6tmKeovocjsup4lDzCZ2R2llbOhnPqvKg3wZzebuYYn5Txk7fkRh4uMBLYVnwgqOv9_T6pf9fzWwus9Y4gMcbb8T-71nS4sDalriWb3xNypJsj1t1viPZxfWywLYYoim5imEj-M8hMvJ1esKqGwQ7dHGxPd0nVDTLQnfaBrsXMpKYST_wdFUiXAT83ITrUl647Sq-X9NyyXCypCO7O8jZxhBAC4VrTcwNfcjSeCxE9uorbVBR4kBlGa7w-09EvzLetBHmG8-_I-qQtKXmgU2Ovf0P7-tyRo5xLJqH8ZKgnQNoDE8pJWm7qMfBq35AQEyloPqGBOoHDUqBB-jCMVIbXV2GbWXyKkIrjSQU-V6p7PkHuzatDCnT4uk3_kYlWyiX67ZLD_8Vlp396dUwRj2C-9xxOlQqegHIWK79QcYiYY4sQK9OqNYcFlx35m4hL36YUjgSRpchZHaXAbClK0azsWbeS3h0jeQViWRA26sYqDkdMRPNH7IvN3DG59CWZZWAoFDW8MQzfumm-5x6HdP78wmEQtV_S3hP-L-xJi_s29mdcNlsrOvN3AQRek1V_mFIgD-fe_UkhP5EDO321Dsi9LDbnpUWq5q2qXfd557Y5bKOStJ_fLS3nN0m8w5e_24oN7Ax_ZFHD1sdnaDhALYAwqRQiJf-a-HugvAMOeWHKb4TOc5lGKwnyxGUZkcXcaSLX8RFT0j_L2YyCK16YTMEjr_nHGqKh24C7hjiCidt2ZO7Er0fS6w=w1723-h969-s-no-gm" alt="DripIN Snapshot 01" width=600 />
+    </td>
+    <td align="center">
+      <img src="https://lh3.googleusercontent.com/pw/AP1GczNDvPb6mygMK9bhFg_JfM4iDGGgDT42Mh6vnP5978bMdZRQDyzWLJFhzJCL0hU9szz_A1F36MXGujt6w46mxgB-18ti83yw5K8RK6ciS6TTo7yqt0HbW-tNjXjQw1dooI6deVwOxagl7bSb7BcRLj0HVD8HIEeF06qe5tIYibHlGNJiuwH7EnZF6rCAyny81eJC6H6AoJSY9d9oW2pFaut5FSft4taCBHOfQWJ0XA0wNshrqGe17rAsToUr45dhFZvEI0VZ_riX0UFGsk6UBZHRa1oMn0QHNHnmxWsgtMV7pocqfRrJFKptSiWLVZZeaIIUGxp_yAwMiQw9O7V3YOFEyZBzqkv7EV466EQQskxzUyIENkaQxJzxV96AsY797TLKrz_eSQgwysfQrcKN3n68DseBcK1bFasdF_V9JtdWhvcrCPNsHu4-8gl3RwA2Ou9Nk3QSfxliGfzxutBI8XyiKHsgUlfpO8NBFbeSwmRtbvYRUTtRU8CXx7RKtJ7hVyhQvYjxzrVPgG1C7G3xaXuWF9QY04mrq1QbNobJhjkjltzLAQhWqvEtmycsK2BME40aZ2R2LwkUgGcyrIfmCUEWfB7e5Xb6gGIEw_MZSa8ZPMsTHax2IrGjtWoNU5e4lh5wM4c-zOB9llNL_Kb0I6w3Gf3VvdIg-PDcT5RnZLjGc_lxGrqhB_yseGB219FZ6I4kY1LQg3jRfFWFb5v2Ih0_kO5uIwmbiLLGRHLoxN4DAhsgLzDmfDec-eUC4rQXd_WCkH6mgFAAjcsarDrsrcUtdun76i7XgrJtleglswQHKYhrU2NmyyqCLFIQS1A5Xn9PK-Ez8s0huLIB_vWLFd6xSgh3AexHt2AAnaARISgaPUfbSUlHQwyCTOSSDnx9DMybdA8OVCuA_xOm7lXdERrSQgwhM6eM_AlN5ixghOX2kd0m4EV9v8zBF59D34EH85eL9hD0q_OMFKb6OT-MQ9wos5crOQ=w1723-h969-s-no-gm" alt="DripIN Snapshot 02" width=600 />
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <img src="https://lh3.googleusercontent.com/pw/AP1GczNbfND4aJPlcMXimFv2WgghDFlyw7VDn-tOFx2EwSJrAscYhCOL0l5_dPT6YfADt2VTH8ggHX55Svngn1hGiqzLml9EaxKGEDDmIo_8r-RrK21Kojh4BAphGzmhqIJgEBtFD91B9Coz92F93iNu_W4i6qzdl0AX_Gmi7FW9R6H-jsROzo5inCI6eUbMoFYiczd3_rpY802jUShT_eza4HRbAT2TZicUmarK60KUwRe6_yTo1w3GZmz8Mdhl3iaQIAd-Dg4QfKPMmyIQOOlJEdo5zlWN2sa9l1sUSXLJ36PunTBQkvYbrlt6-lHGDSPInVX7Z6KFtclQ_u5giOQyYgRihuT7ORWch9yX6MYYPZWM9k_triawaiwXKUzsMiYXkLxiqAY05h7_1E44Pl9CazNe9nuUY6-sjw6WnsmSjg_Y8R7cYfNwlpZsbNbN67AYjcuAKeWhhcMB2LfSL-ci9THCekfDYD5Q62ms8p1N4_2RV3llKUesw1qMeQZMGW33nBZ3srDFnG2hUcUYMitA9vKhXTm-BL_Yf2tjtlxl6mfh470rkhIxchZ8KPi4jCKbTNEHf85t5LTXHfxpNH_0Ky3kSzgyDiXeO0Mjd8KLSoq5eJ9RnaUSBuoHQ62rJXaDADCF2RMkzFtkJ6nDIeAO0Ybs5yWpSmjcdiHbcNfWmxxZlta24Uo6TTvO2Zw12S5Z4y-otW9d2QLU8URjktw4-DvSvP0edMgp3ImFrMXZF2XCu1y4_uWEh2xwEneSA_KfgIi1pKK00rosD4s8n3Nl13qpzp0FKsyBcljkRjLOd0Pxxoo2TLg8D5h_264x51wuFQ45HT8cOiwfqE2ixDlRmvg-Wv4l5NinqfAbfBMgSV4bBKfKrZwx68OJeErOhzUJqib6DlAh4SiEGAC7yUX9LgvUdG_U75vYaTyBgt4xb3QoePpe-MaH2WS_dDh1_xnZDhziPHmbrWduOJPbxxTFn2TYhijQ=w1723-h969-s-no-gm" alt="DripIN Snapshot 03" width=600/>
+    </td>
+    <td align="center">
+      <img src="https://lh3.googleusercontent.com/pw/AP1GczOrcs3AYP9gY6w8lMxntw6c1MRKwUcMM_Kgj-44eZlIulzhacqwLJxstT6NLGeq2xTMrZOLYKU64qlJiNIeuWEhzWlX0UBFyRysZzujgah5q1Ohl1SLc0uF8ad6W74RnSmKkRPSa4bNFMPZlwqUTo1MZCMBQUzLWpuEHm-WLhvETU26y8fKKBm6Zn0WppBjWQjp2kzYlDLeAMQDN-oMHNo-azOdVYwyvvWuc3GiGGC2G_ZZCNKfggZg4ZywkJ7OGNNlRjGPBg7vyQq2PDjmOejf-CyFX7O7kvQgaphKRuLWcJnt2d_LQn2M16j2CnbhM2fblWf3gtadJyQhvSFbmTfHrAEpCdSxRKDwWgY4XGIs2eA_LLs1K5p4kGj1ZcVjT6ufz2AUE0SSaCbOcIIrZxXL1wiskRsgIdFyhTRHdX-i5otluWIX5Piv4JV0N-qNnrxrmKIvBg18O1wMUaywI7tp7hr3ltgplrAfZ5WfqPLMZ0H3qcAj9UGyrARNnUQhQ7G-b78aXEYIUktCvZxF8K8vWEHI9Tvzs1ElkkIK-WM7P-4mvCRIGR5_X-_L6_tw_uTY3tSQoIJhvikUsfPYkgZOxHdv44qMNv_WRwZ4Wn4i_uPM3dFLp-eSL7c8LqWGhlqh582c5-lQ4NjjDYxi_crPw0_gZD9q47uDecnUIWSXIbgdJ4YOT-WxeSeWItbmmUHpkm78FMF0daWIZF3LZpZ7rrDY827rwSF3k_jzd6PVli_ALYOTJtuMcmoJj0h-kgpuLr4vIvCc3fsL6wD_2eRav-LtBEusHHCO41nUqCvRfwOH0OfGzFnXZFTMbFnEV15p32IfZF_-vc_Dp5HZjeMDKx1zt5v9hA3IuB8peLH1jDQiI0GIf1TUtx0SUYeSNPXF9JT2TUKidTNzjfvH7oTOnFRUZ2C7lYbhRnLLWsRfClp2wRqaoCCg0KU2H4R3bwS6tJA54wqfpaGGSBjzTGnbpCJ3Xw=w1723-h969-s-no-gm" alt="DripIN Snapshot 04" width=600/>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <img src="https://lh3.googleusercontent.com/pw/AP1GczMX7LTAVqbiRx_hfDz4DMRdA0lwNxXWqlNkin8KYwFz17I4P7ADzoqt7Ws4NX6lEIFAI5sTC1B93js3k4tGR0Okv-vZkThhAc1iQQt-_L-WckIJjok8UnZfqcU27xolCh9dCNsFtZtNWn9ppgks3y2lDCaGF5CZszJTRy96j3gnYF_W7GJuH6ksjx_OQ4FHse7DDeK9TM11ZfYUS2hliv_CQ42lt4cTViSAqosZEes_eRocCTI_3NLKMPMso84PupCb8VlGIjGaR1Pviq0q0iOXnz4KhZKJWq78gPF4E6ADIRUIv_M6HtnIvPmh-INPStqxXmoA1Ud3k_f6uFM9xwLFZ2o5qBKu7GXZswM0Lmv3zgYruDSw0vVwyRAoTDrp_IgPfK_eqWUI5jxXjcyrxwq2YqIv-oF6A3GaBp4m-m3sgE2PlFu6CLB5hjvvQG17wCx3A4PYuWsT4ZGh5gRrRxe3Z0NVDCAwRRr9a497jMRx7NrSVMIEsmCPyHYsK2nYCk4xS4uWyWHMFDb556DbFYjUAN_g_cepdtCMG4VNIe9mZbgv8OGUKSiX5kLWvfKHsOPgNT1jpRp9E-3jo9kgTIFd3gUGR48DwddIe7ukBreFZjFnyXDr5ulM7p3zHdbY-XR6OVRXtY_N46KR1FCoZnoKBsHPfWDT4qPLu8tOafnzIuiE2PPOSk5femY9N8qtK5WxfBSZk-8Lv5CJwGTNmCttYAI1Fvf4Et25sk8GS4tpGWPv03W9JHgLgS_Br9lsHgnMJj-489qUbwwxx6Rsj9zt8KB2gTUmUeJnLknfm_C-G6J7AVzFTIDEYUnI99Mz1dQyJh_NSfcGosp9-kjap3rsMveN0xAfkwmRBtWGqGiQebUmJDYStV2oitqxuYt2D2RTsQqfDC4lF_ZVBh_pRbPYxbJxDWpRUIE0OJULQkgD7dQyO2wQK_u3kgT3KnZu61NZtDrqHLsgAbYgWX9EUsvY6QxJ=w1723-h969-s-no-gm" alt="DripIN Snapshot 05" width=600/>
+    </td>
+    <td align="center">
+      <img src="https://lh3.googleusercontent.com/pw/AP1GczN11lDBaZqb-BKuP9-GtN0hzokv9Ii0zQDnKQL4KTs2csWXlg6RwNoZMlwXnjjZd3XvelcnPCmrL_TmfKhCUQ1-4sz8xhHtWCxI8kwXCcMY8R2PfFC4iFbxpHtfjoUmSK9a-1k6WucKI7AG63r3C91Gae_Q-UlOa6AZFidB1bm16hDzV4XMTB2R8OEFLMYj-Qma1ZvOhKdkn7cIQA7F1ayfziLDJF7amEiqgV2Rl77iWSpWbiuXpvnVaL4ifS6krxk6jr-x8Gkj_CPo6GvycK5Fgu7Z5lUSzVxozS9Hx1naq_SuKb4GAPBUwtNrI3bhIE65rn8JrWRIL-KdQ9YbG3Py25eVNi41BoQGbHu142Bk3vLaeBwvGOuRGvkYnAPmIcLMPwwcIrfL_5yezSXWzvvqbm89yXTMDBIdGUkgIT3YEohgzWiW-wzwLkqU__HdV72CYv4YCC0a9bGep9lVfvk4yRmuYFXPC6nFDyPt459IhIhKQPcMcNKx3lKYtOb6TkCfmFrmwBuZc3svsoA02UWDAvUfi5a7Eet5IkOjL7r0Ag3W-LrSuZdqv1MZkNjS1jx8yu1m55lx75MpXQzhMtdIVvn_34MxrbXpLtAKyxZl5PGGh2kXjm0zkt4LJEZbAa3Aa59xOUqdsM1yFbam-Hg84kDIfuNtcYwTNvqMKNR9zOiBl0mt_2ZTCUtLVLOQkA6N7zQb7q_2z7PztIT9GpWfsjrDN0uaRHcchfiV3T1kpRzZfdo-QSMXHW1xsVr16nwGQC4zyS182GseMIDGs48ppDjRVzX1siiuL9rE082jOlPQni4j1NSOC3lB5C7bGVrrql_NQ_hJYugnvCpzhxk1ANlUhbill1OwqpEUzDSFBvtsthueGY6Tad-kSVSUVej7KrtrVKUbKllq7b0ccEf3RduViVaF1yMCCaIIhVnGrbx4BOplPYBFrmJhk5xlus571n3BSEvQ8wTQ5fTrAN7sb53m=w1723-h969-s-no-gm" alt="DripIN Snapshot 06" width=600/>
+    </td>
+  </tr>
+</table>
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+# Installation
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+1. Setup your `.env.local` file at root dir of the project
 
-## Deploy on Vercel
+  ```js
+  API_KEY=<YOUR_HUDDLE01_API_KEY>
+  NEXT_PUBLIC_PROJECT_ID=<YOUR_HUDDLE01_PROJECT_ID>
+  NEXT_PUBLIC_HELIUS_API_KEY=<YOUR_HELIUS_API_KEY>
+  NEXT_PUBLIC_LIVEBLOCKS_PUBLIC_KEY=<YOUR_LIVEBLOCKS_PUBLIC_KEY>
+  ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+2. Install dependencies and run your development server locally
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+  ```bash
+  yarn
+  yarn run dev
+  ```
+
+  or
+
+  ```bash
+  npm i
+  npm run dev
+  ```
+
+# Authors
+
+- [@Code-Patrh](https://github.com/Code-Parth)
+- [@Sarthak Bhave](https://github.com/SarthakBhave)
+- [@techking007](https://github.com/techking007)
+- [@imsp18](https://github.com/imsp18)
+
+# Demo
+[Link to demo video](https://www.loom.com/share/3eec5ac93e1a4024aa838686b4fd9a02?sid=22561bac-75ac-4eec-829b-2ed335bdee27)

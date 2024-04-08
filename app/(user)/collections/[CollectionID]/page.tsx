@@ -14,6 +14,7 @@ import { Item } from "@/types/SearchAssetsType";
 import { createRoom } from "@/actions/createRoom";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Room } from "@/components/liveblocks/Room";
+import dripHuddleData from "@/lib/drip/dripHuddleData";
 import { ItemsResponse } from "@/types/SearchAssetsType";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { CollaborativeApp } from "@/components/liveblocks/CollaborativeApp";
@@ -22,6 +23,11 @@ import { ChevronLeftIcon, ChevronRightIcon, DownloadIcon } from "@radix-ui/react
 import { Card, CardContent, CardDescription, CardHeader, CardFooter, CardTitle } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger, } from "@/components/ui/dialog";
 
+interface dripHuddleDataInterface {
+    collectionAddress: string;
+    huddleRoom: string;
+}
+
 export default function SpecificCollectionPage({ params }: { params: { CollectionID: string }; }) {
     const perPage = 6;
     const router = useRouter();
@@ -29,6 +35,16 @@ export default function SpecificCollectionPage({ params }: { params: { Collectio
     const [page, setPage] = useState(0);
     const [tokens, setTokens] = useState<ItemsResponse | null>(null);
     const [collectionNFTData, setCollectionNFTData] = useState<Item[] | null>(null);
+    const [huddleDripCollectionRoomId, setHuddleDripCollectionRoomId] = useState<dripHuddleDataInterface>();
+
+    useEffect(() => {
+        const findRoom = dripHuddleData.find((room) => room.collectionAddress == params.CollectionID);
+        if (findRoom) {
+            setHuddleDripCollectionRoomId((findRoom as unknown) as dripHuddleDataInterface);
+        }
+    }, [params.CollectionID]);
+
+    // console.log("-------------------------------",huddleDripCollectionRoomId?.collectionAddress);
 
     useEffect(() => {
         if (publicKey) {
@@ -164,8 +180,7 @@ export default function SpecificCollectionPage({ params }: { params: { Collectio
                                                     <Button
                                                         className="flex items-center gap-2"
                                                         onClick={async () => {
-                                                            const roomId = await createRoom();
-                                                            router.push(`./${params.CollectionID}/${roomId}/lobby`);
+                                                            router.push(`./${params.CollectionID}/${huddleDripCollectionRoomId?.huddleRoom}/lobby`);
                                                         }}
                                                     >
                                                         Join With Huddle01

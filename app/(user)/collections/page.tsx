@@ -14,10 +14,8 @@ import { ItemsResponse } from "@/types/SearchAssetsType";
 import dripCollectionAddress from "@/lib/drip/dripCollectionAddress";
 import { ChevronLeftIcon, ChevronRightIcon } from "@radix-ui/react-icons";
 import SpinnerLoadingAnimation from "@/components/ui/spinnerLoadingAnimation";
-import { Card, CardContent, CardDescription, CardHeader, CardFooter, CardTitle } from "@/components/ui/card";
-import { Command, CommandDialog, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList, CommandSeparator, CommandShortcut } from "@/components/ui/command"
-import { Item } from "@radix-ui/react-dropdown-menu";
-
+import { Card, CardContent, CardHeader, CardFooter, CardTitle } from "@/components/ui/card";
+import { Command, CommandDialog, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command"
 
 export default function CollectionPage() {
     const { publicKey } = useWallet();

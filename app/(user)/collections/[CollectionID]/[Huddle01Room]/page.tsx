@@ -18,27 +18,26 @@ import PeerData from "@/components/huddle01/Sidebar/PersonData/peerData";
 import ChatsData from "@/components/huddle01/Sidebar/ChatData/ChatsData";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Video, VideoOff, Mic, MicOff, Volume2, Monitor, MonitorStop, Users, MessageSquareText, PhoneOff, SendHorizontal } from "lucide-react";
 import { useDataMessage, useDevices, useLocalAudio, useLocalMedia, useLocalPeer, useLocalScreenShare, useLocalVideo, usePeerIds, useRoom } from "@huddle01/react/hooks";
 
 export default function Huddle01RoomPage({ params }: { params: { Huddle01Room: string }; }) {
-    const { sendData } = useDataMessage();
-    const [message, setMessage] = useState("");
-    const { requestedPeers } = useStudioState();
-    const { isVideoOn, enableVideo, disableVideo, stream } = useLocalVideo();
-    const { isAudioOn, enableAudio, disableAudio, stream: audioStream } = useLocalAudio();
-    const { fetchStream } = useLocalMedia();
-    const { setPreferredDevice: setCamPrefferedDevice } = useDevices({ type: "cam" });
-    const { setPreferredDevice: setAudioPrefferedDevice } = useDevices({ type: "mic" });
-    const { name, addChatMessage, activeBg, videoDevice, audioInputDevice, layout, isScreenShared, setIsScreenShared } = useStudioState();
-    const videoRef = useRef<HTMLVideoElement>(null);
-    const { peerIds } = usePeerIds({ roles: [Role.HOST, Role.GUEST] });
-    const [isCopied, setIsCopied] = useState(false);
     const router = useRouter();
     const { peerId } = useLocalPeer();
+    const { leaveRoom } = useRoom();
+    const { sendData } = useDataMessage();
+    const { fetchStream } = useLocalMedia();
+    const [message, setMessage] = useState("");
     const { videoTrack } = useLocalScreenShare();
-    const { leaveRoom, room } = useRoom();
-    const { role, metadata, updateMetadata } = useLocalPeer<PeerMetadata>();
+    const videoRef = useRef<HTMLVideoElement>(null);
+    const { role, metadata } = useLocalPeer<PeerMetadata>();
+    const { isVideoOn, enableVideo, disableVideo, stream } = useLocalVideo();
+    const { setPreferredDevice: setCamPrefferedDevice } = useDevices({ type: "cam" });
+    const { setPreferredDevice: setAudioPrefferedDevice } = useDevices({ type: "mic" });
+    const { isAudioOn, enableAudio, disableAudio, stream: audioStream } = useLocalAudio();
+    const { name, addChatMessage, videoDevice, audioInputDevice, isScreenShared, setIsScreenShared } = useStudioState();
+    const { peerIds } = usePeerIds({ roles: [Role.HOST, Role.GUEST] });
     const { state } = useRoom({
         onLeave: async () => {
             router.push(`./`);
@@ -213,7 +212,20 @@ export default function Huddle01RoomPage({ params }: { params: { Huddle01Room: s
 
                 <CardFooter className="w-full flex justify-between pt-6 border-t-[1px] rounded-md mt-6">
                     <CardContent className="flex gap-4 pb-0">
-                        <Button variant="destructive" onClick={leaveRoom}><PhoneOff /></Button>
+                        <Dialog>
+                            <DialogTrigger>
+                                <Button variant="destructive">
+                                    <PhoneOff />
+                                </Button>
+                            </DialogTrigger>
+                            <DialogContent>
+                                <DialogHeader>
+                                    <DialogTitle>are you sure to want to leave this Call?</DialogTitle>
+                                </DialogHeader>
+                                <Button onClick={leaveRoom}>Yes</Button>
+                                <Button>No</Button>
+                            </DialogContent>
+                        </Dialog>
                     </CardContent>
                     <CardContent className="flex gap-4 pb-0">
                         <ChangeDevice deviceType="cam">

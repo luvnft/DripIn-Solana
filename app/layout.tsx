@@ -8,6 +8,7 @@ import { Toaster } from "react-hot-toast";
 import NextTopLoader from "nextjs-toploader";
 import Header from "@/components/common/Header";
 import Footer from "@/components/common/Footer";
+import { Analytics } from '@vercel/analytics/react';
 import { ThemeProvider } from "@/components/theme-provider";
 import { PhantomWalletAdapter } from "@solana/wallet-adapter-wallets";
 import { WalletModalProvider } from "@solana/wallet-adapter-react-ui";
@@ -45,6 +46,7 @@ export default function RootLayout({
                                         <Header />
                                         <div className="w-full max-w-[95vw] mx-auto ">
                                             {children}
+                                            <Analytics />
                                         </div>
                                         <Footer />
                                     </main>

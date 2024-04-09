@@ -6,6 +6,9 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { PeerMetadata } from "@/types/huddle01Type";
 import { useEffect, useRef, useState } from "react";
+import dripHuddleData from "@/lib/drip/dripHuddleData";
+import { useWallet } from "@solana/wallet-adapter-react";
+import { ItemsResponse } from "@/types/SearchAssetsType";
 import PersonVideo from "@/components/huddle01/media/Video";
 import ChangeDevice from "@/components/huddle01/changeDevice";
 import { useStudioState } from "@/lib/huddle01/studio/studioState";
@@ -15,10 +18,17 @@ import SpinnerLoadingAnimation from "@/components/ui/spinnerLoadingAnimation";
 import { useDevices, useLocalMedia, useLocalPeer, useRoom } from "@huddle01/react/hooks";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 
+interface dripHuddleDataInterface {
+    collectionAddress: string;
+    huddleRoom: string;
+}
+
+
 export default function HuddleLobbyPage({ params }: { params: { Huddle01Room: string } }) {
     const router = useRouter();
-    const { fetchStream } = useLocalMedia();
+    const { publicKey } = useWallet();
 
+    const { fetchStream } = useLocalMedia();
     const { name, setName } = useStudioState();
     const { metadata } = useLocalPeer<PeerMetadata>();
 
@@ -30,6 +40,9 @@ export default function HuddleLobbyPage({ params }: { params: { Huddle01Room: st
     const { setPreferredDevice: setCamPrefferedDevice } = useDevices({ type: "cam" });
     const { setPreferredDevice: setAudioPrefferedDevice } = useDevices({ type: "mic" });
 
+    const [checkCollectionVerification, setCheckCollectionVerification] = useState<boolean>(false);
+    const [huddleDripCollectionRoomId, setHuddleDripCollectionRoomId] = useState<dripHuddleDataInterface>();
+
     const [isJoining, setIsJoining] = useState(false);
     const { joinRoom } = useRoom({
         onJoin: () => {
@@ -37,6 +50,58 @@ export default function HuddleLobbyPage({ params }: { params: { Huddle01Room: st
             router.push(`./`);
         },
     });
+
+    useEffect(() => {
+        const findRoom = dripHuddleData.find((room) => room.huddleRoom == params.Huddle01Room);
+        if (findRoom) {
+            setHuddleDripCollectionRoomId((findRoom as unknown) as dripHuddleDataInterface);
+        }
+    }, [params.Huddle01Room]);
+
+    const verifyNFTCollection = async (walletAddress: string, collectionAddress: string): Promise<ItemsResponse> => {
+        const url = `https://mainnet.helius-rpc.com/?api-key=${process.env.NEXT_PUBLIC_HELIUS_API_KEY}` || "https://mainnet.helius-rpc.com";
+        try {
+            const response = await fetch(url, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    jsonrpc: "2.0",
+                    id: "my-id",
+                    method: "searchAssets",
+                    grouping: ["collection", collectionAddress],
+                    params: {
+                        ownerAddress: walletAddress,
+                        tokenType: "all",
+                        displayOptions: {
+                            showCollectionMetadata: true,
+                        },
+                    },
+                }),
+            });
+            const data = await response.json();
+            return { items: data.result };
+        } catch (error) {
+            console.error("Error fetching tokens:", error);
+            return { items: { total: 0, limit: 1000, cursor: "", items: [] } };
+        }
+    };
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const { items } = await verifyNFTCollection(publicKey?.toBase58()!, huddleDripCollectionRoomId?.collectionAddress!) as ItemsResponse;
+                if (items.total > 0) {
+                    setCheckCollectionVerification(true);
+                }
+            } catch (error) {
+                console.error("Error fetching tokens:", error);
+            }
+        };
+
+        fetchData();
+    }, [publicKey, huddleDripCollectionRoomId]);
 
     useEffect(() => {
         if (videoRef.current && stream) {
@@ -149,15 +214,24 @@ export default function HuddleLobbyPage({ params }: { params: { Huddle01Room: st
                                             toast.error("Please enter your name");
                                             return;
                                         }
-                                        setIsJoining(true);
-                                        const response = await fetch(
-                                            `/api/token?roomId=${params.Huddle01Room}&displayName=${name}`
-                                        );
-                                        const token = await response.text();
-                                        await joinRoom({
-                                            roomId: params.Huddle01Room,
-                                            token,
-                                        });
+                                        if (!checkCollectionVerification) {
+                                            toast.error("Maybe you don't have the required NFT collection to join this room.");
+                                            return;
+                                        }
+                                        else {
+                                            const verify = toast.loading("Verifying NFT Collection...");
+                                            setIsJoining(true);
+                                            const response = await fetch(
+                                                `/api/token?roomId=${params.Huddle01Room}&displayName=${name}`
+                                            );
+                                            const token = await response.text();
+                                            await joinRoom({
+                                                roomId: params.Huddle01Room,
+                                                token,
+                                            });
+                                            toast.dismiss(verify);
+                                            toast.success("NFT Collection Verified!");
+                                        }
                                     }}
                                     disabled={isJoining}
                                 >

@@ -44,8 +44,6 @@ export default function SpecificCollectionPage({ params }: { params: { Collectio
         }
     }, [params.CollectionID]);
 
-    // console.log("-------------------------------",huddleDripCollectionRoomId?.collectionAddress);
-
     useEffect(() => {
         if (publicKey) {
             const walletAddress = publicKey.toBase58();

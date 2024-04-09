@@ -26,7 +26,7 @@ export default function RootLayout({
 
     useEffect(() => {
         if (!publicKey) {
-            // router.push("/");
+            router.push("/");
         }
     }, [publicKey, router]);
 

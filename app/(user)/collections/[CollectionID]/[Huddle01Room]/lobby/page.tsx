@@ -70,9 +70,9 @@ export default function HuddleLobbyPage({ params }: { params: { Huddle01Room: st
                     jsonrpc: "2.0",
                     id: "my-id",
                     method: "searchAssets",
-                    grouping: ["collection", collectionAddress],
                     params: {
                         ownerAddress: walletAddress,
+                        grouping: ["collection", collectionAddress],
                         tokenType: "all",
                         displayOptions: {
                             showCollectionMetadata: true,

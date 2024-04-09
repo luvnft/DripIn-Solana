@@ -10,6 +10,7 @@ import Header from "@/components/common/Header";
 import Footer from "@/components/common/Footer";
 import { Analytics } from '@vercel/analytics/react';
 import { ThemeProvider } from "@/components/theme-provider";
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import { PhantomWalletAdapter } from "@solana/wallet-adapter-wallets";
 import { WalletModalProvider } from "@solana/wallet-adapter-react-ui";
 import { ConnectionProvider, WalletProvider } from "@solana/wallet-adapter-react";
@@ -47,6 +48,7 @@ export default function RootLayout({
                                         <div className="w-full max-w-[95vw] mx-auto ">
                                             {children}
                                             <Analytics />
+                                            <SpeedInsights />
                                         </div>
                                         <Footer />
                                     </main>

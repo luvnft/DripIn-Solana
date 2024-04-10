@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 
 export default function Footer() {
     return (
-        <footer className="w-full mx-auto border-t rounded-t-lg">
+        <footer className="w-full mx-auto border-t rounded-t-lg mt-4">
             <div className="max-w-[95vw] mx-auto py-6 flex justify-between items-center">
                 <Label className="flex items-center text-center">
                     Made with ❤️ DripIN

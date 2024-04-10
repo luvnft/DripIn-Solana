@@ -86,7 +86,7 @@ export default function SpecificCollectionPage({ params }: { params: { Collectio
                 ))
             }
 
-            <div className="flex flex-row gap-4">
+            <div className="flex max-sm:flex-col md:flex-row lg:flex-row xl:flex-row 2xl:flex-row gap-4">
                 <div className="basis-1/3 pt-6">
                     {
                         collectionNFTData === null ? (
@@ -195,6 +195,9 @@ export default function SpecificCollectionPage({ params }: { params: { Collectio
                 </div>
                 <div className="basis-2/3 pt-6">
                     <>
+                        <div className="flex p-6 max-sm:pt-0 max-sm:justify-center md:sr-only lg:sr-only xl:sr-only 2xl:sr-only">
+                            <Label className="text-2xl">Collected NFTs</Label>
+                        </div>
                         {collectionNFTData === null ? (
                             <>
                                 <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4">

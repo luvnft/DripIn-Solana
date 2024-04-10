@@ -6,12 +6,11 @@ import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
-import { Copy, LogOut, Menu, BookImage } from "lucide-react";
+import { Copy, LogOut, BookImage } from "lucide-react";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { MoonIcon, SunIcon } from "@radix-ui/react-icons";
 import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuSeparator } from "@/components/ui/dropdown-menu";
 
 export default function Header() {
@@ -81,7 +80,7 @@ export default function Header() {
                                         <Link href="../collections" className="md:hidden lg:hidden xl:hidden 2xl:hidden">
                                             <DropdownMenuItem className="flex items-center gap-2 cursor-pointer">
                                                 <BookImage size={18} />
-                                                Collections
+                                                collections
                                             </DropdownMenuItem>
                                         </Link>
                                         <DropdownMenuItem className="flex items-center gap-2 cursor-pointer" onClick={disconnect}>

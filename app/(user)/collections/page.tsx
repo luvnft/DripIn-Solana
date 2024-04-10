@@ -108,7 +108,7 @@ export default function CollectionPage() {
                                 </Label>
                             ) : (
                                 <Label className="text-xl">
-                                    {publicKey?.toBase58()}
+                                    {publicKey?.toBase58().slice(0, 4) + ".." + publicKey.toBase58().slice(20,24) + ".." + publicKey?.toBase58().slice(-4)}
                                 </Label>
                             )
                         }

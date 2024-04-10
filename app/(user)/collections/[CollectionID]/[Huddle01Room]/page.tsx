@@ -210,7 +210,7 @@ export default function Huddle01RoomPage({ params }: { params: { Huddle01Room: s
                     </section>
                 </div>
 
-                <CardFooter className="w-full flex justify-between pt-6 border-t-[1px] rounded-md mt-6">
+                <CardFooter className="w-full flex justify-between pt-6 border-t-[1px] gap-4 rounded-md mt-6 max-sm:flex-col-reverse">
                     <CardContent className="flex gap-4 pb-0">
                         <AlertDialog>
                             <AlertDialogTrigger>
@@ -223,7 +223,7 @@ export default function Huddle01RoomPage({ params }: { params: { Huddle01Room: s
                                     <AlertDialogTitle>Do you want to leave?</AlertDialogTitle>
                                 </AlertDialogHeader>
                                 <AlertDialogFooter>
-                                    <AlertDialogCancel>Continue</AlertDialogCancel>
+                                    <AlertDialogCancel>Cancel</AlertDialogCancel>
                                     <Button variant="destructive" onClick={leaveRoom}>
                                         Yes
                                     </Button>
@@ -268,14 +268,15 @@ export default function Huddle01RoomPage({ params }: { params: { Huddle01Room: s
                         <Button
                             variant={isScreenShared ? "destructive" : "outline"}
                             onClick={() => {
-                                if (isScreenShared) {
-                                    // if (shareStream !== null) {
-                                    //     toast.error("Only one screen share is allowed at a time");
-                                    //     return;
-                                    // }
+
+                                if (shareStream !== null) {
                                     stopScreenShare();
                                 }
                                 else {
+                                    if (isScreenShared) {
+                                        toast.error('Only one screen share is allowed at a time');
+                                        return;
+                                    }
                                     startScreenShare();
                                 }
                             }}

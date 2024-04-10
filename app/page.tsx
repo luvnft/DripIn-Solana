@@ -1,14 +1,31 @@
+"use client"
+
 import Link from "next/link";
 import Image from "next/image";
 import { MoveRight } from 'lucide-react';
+import { useEffect, useState } from "react";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
+import { useWallet } from "@solana/wallet-adapter-react";
+import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 
 export default function Home() {
+    const { publicKey, disconnect } = useWallet()
+    const [isConnected, setIsConnected] = useState<boolean>(false);
+
+    useEffect(() => {
+        if (publicKey) {
+            setIsConnected(true);
+        }
+        else {
+            setIsConnected(false);
+        }
+    }, [publicKey])
+
     return (
         <>
             <div className="flex flex-col items-center justify-center min-h-[90vh]">
-                <Label className="text-6xl">DripIN Revolutionizes Social</Label>
+                <Label className="text-6xl max-sm:text-4xl max-sm:pb-4">DripIN Revolutionizes Social</Label>
                 <Label className="text-xl">Where community syncs, creators thrive, and tokens unlock the future of social connectivity.</Label>
                 <div className="my-20 p-6 flex flex-col gap-4 items-center justify-center bg-slate-300 dark:bg-slate-800 rounded-lg">
                     <Label className="text-4xl">Built on</Label>
@@ -24,12 +41,24 @@ export default function Home() {
                         </Link>
                     </div>
                 </div>
-                <Link href="./collections">
-                    <Button variant="outline" className="flex items-center text-md gap-2">
-                        Explore Collections
-                        <MoveRight />
-                    </Button>
-                </Link>
+
+                {isConnected ? (
+                    <>
+                        <Link href="./collections">
+                            <Button variant="outline" className="flex items-center text-md gap-2">
+                                Explore Collections
+                                <MoveRight />
+                            </Button>
+                        </Link>
+                    </>
+                ) : (
+                    <>
+                        <Button variant="outline" className="md:hidden lg:hidden xl:hidden 2xl:hidden">
+                            <WalletMultiButton />
+                        </Button>
+                    </>
+                )}
+
             </div>
         </>
     );

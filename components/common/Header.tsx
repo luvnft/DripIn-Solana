@@ -6,11 +6,12 @@ import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
+import { Copy, LogOut, Menu, BookImage } from "lucide-react";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { MoonIcon, SunIcon } from "@radix-ui/react-icons";
-import { Copy, LogOut } from "lucide-react";
 import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuSeparator } from "@/components/ui/dropdown-menu";
 
 export default function Header() {
@@ -29,7 +30,7 @@ export default function Header() {
 
     return (
         <>
-            <div className="w-full border-b">
+            <div className="w-full border-b rounded-b-lg">
                 <div className="max-w-[95vw] w-full px-3 xl:p-0 my-5 mx-auto flex justify-between items-center">
                     <Link href="../" className="cursor-pointer flex items-center gap-4">
                         <Image src="/favicon.webp" alt="DripIN Logo" width={256} height={256} className="w-12 h-12" />
@@ -37,8 +38,7 @@ export default function Header() {
                     </Link>
 
                     <div className="flex items-center gap-5">
-                        {/* <Link href="../discover">Discover</Link> */}
-                        <Link href="../collections">Collections</Link>
+                        <Link href="../collections" className="max-sm:hidden">Collections</Link>
 
                         <DropdownMenu>
                             <DropdownMenuTrigger asChild>
@@ -66,7 +66,6 @@ export default function Header() {
                                 <DropdownMenu>
                                     <DropdownMenuTrigger>
                                         <Avatar>
-                                            {/* <AvatarImage src="https://github.com/shadcn.png" /> */}
                                             <AvatarFallback>{publicKey?.toBase58().slice(0, 3)}</AvatarFallback>
                                         </Avatar>
                                     </DropdownMenuTrigger>
@@ -79,12 +78,12 @@ export default function Header() {
                                             <Label>{publicKey?.toBase58().slice(0, 4) + ".." + publicKey?.toBase58().slice(-4)}</Label>
                                         </DropdownMenuItem>
                                         <DropdownMenuSeparator />
-                                        {/* <Link href="../profile">
+                                        <Link href="../collections" className="md:hidden lg:hidden xl:hidden 2xl:hidden">
                                             <DropdownMenuItem className="flex items-center gap-2 cursor-pointer">
-                                                <User size={18} />
-                                                Profile
+                                                <BookImage size={18} />
+                                                Collections
                                             </DropdownMenuItem>
-                                        </Link> */}
+                                        </Link>
                                         <DropdownMenuItem className="flex items-center gap-2 cursor-pointer" onClick={disconnect}>
                                             <LogOut size={18} />
                                             disconnect
@@ -94,7 +93,9 @@ export default function Header() {
                             </>
                         ) : (
                             <>
-                                <WalletMultiButton />
+                                <Button className="max-sm:hidden bg-[#8852f4] hover:bg-[#8852f4dd]">
+                                    <WalletMultiButton />
+                                </Button>
                             </>
                         )}
                     </div>

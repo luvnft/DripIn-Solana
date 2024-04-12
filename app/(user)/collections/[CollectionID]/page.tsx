@@ -15,6 +15,10 @@ import { createRoom } from "@/actions/createRoom";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Room } from "@/components/liveblocks/Room";
 import dripHuddleData from "@/lib/drip/dripHuddleData";
+import ImageNFT from "@/components/NFTsViewer/ImageNFT";
+import AudioNFT from "@/components/NFTsViewer/AudioNFT";
+import VideoNFT from "@/components/NFTsViewer/VideoNFT";
+import NFTsViewer3D from "@/components/NFTsViewer/3DNFT";
 import { ItemsResponse } from "@/types/SearchAssetsType";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { CollaborativeApp } from "@/components/liveblocks/CollaborativeApp";
@@ -36,6 +40,11 @@ export default function SpecificCollectionPage({ params }: { params: { Collectio
     const [tokens, setTokens] = useState<ItemsResponse | null>(null);
     const [collectionNFTData, setCollectionNFTData] = useState<Item[] | null>(null);
     const [huddleDripCollectionRoomId, setHuddleDripCollectionRoomId] = useState<dripHuddleDataInterface>();
+
+    const ThreeDMimeType = ["model/gltf-binary", "model/glb"];
+    const VideoMimeType = ["video/mp4", "video/webm", "video/mov"];
+    const AudioMimeType = ["audio/mpeg", "audio/wav", "audio/weba", "audio/mp3"];
+    const ImageMimeType = ["image/png", "image/gif", "image/jpeg", "image/jpg", "image/svg"];
 
     useEffect(() => {
         const findRoom = dripHuddleData.find((room) => room.collectionAddress == params.CollectionID);
@@ -272,13 +281,28 @@ export default function SpecificCollectionPage({ params }: { params: { Collectio
                                                         </Button>
                                                     </DialogTrigger>
                                                     <DialogContent>
-                                                        <Image
-                                                            width={512}
-                                                            height={512}
-                                                            src={item.content.links.image}
-                                                            alt={item.content.metadata.name}
-                                                            className="aspect-square border-2 object-contain w-full h-full rounded-md"
-                                                        />
+                                                        <div className="w-full h-full aspect-square">
+                                                            {
+                                                                VideoMimeType.includes(item.content.files[1].mime) ? (
+                                                                    <VideoNFT
+                                                                        VideoSRC={item.content.files[1].uri}
+                                                                        ThumbnailSRC={item.content.links.image}
+                                                                    />
+                                                                ) : ThreeDMimeType.includes(item.content.files[1].mime) ? (
+                                                                    <NFTsViewer3D ModelSRC={item.content.files[1].uri} ModelALT={item.content.metadata.name} />
+                                                                ) : ImageMimeType.includes(item.content.files[1].mime) ? (
+                                                                    <ImageNFT
+                                                                        ImageSRC={item.content.links.image}
+                                                                        ImageALT={item.content.metadata.name}
+                                                                    />
+                                                                ) : AudioMimeType.includes(item.content.files[1].mime) ? (
+                                                                    <AudioNFT
+                                                                        AudioSRC={item.content.files[1].uri}
+                                                                        ThumbnailSRC={item.content.links.image}
+                                                                    />
+                                                                ) : null
+                                                            }
+                                                        </div>
                                                         <DialogHeader>
                                                             <DialogTitle className="flex items-center justify-between">
                                                                 {item.content.metadata.name}
@@ -289,7 +313,7 @@ export default function SpecificCollectionPage({ params }: { params: { Collectio
                                                             <DialogDescription>
                                                                 {item.content.metadata.description}
                                                             </DialogDescription>
-                                                            <Link href={item.content.links.image} target="_blank" className="flex pt-4">
+                                                            <Link href={item.content.links.animation_url === "" ? item.content.links.image : item.content.links.animation_url} target="_blank" className="flex pt-4">
                                                                 <Button variant="outline" className="w-full">
                                                                     <DownloadIcon className="mr-2 h-4 w-4" />
                                                                     Download

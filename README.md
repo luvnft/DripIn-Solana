@@ -82,3 +82,12 @@ Web: `Next.js` `Tailwind css`
 
 # Demo
 [Link to demo video](https://www.loom.com/share/3eec5ac93e1a4024aa838686b4fd9a02?sid=22561bac-75ac-4eec-829b-2ed335bdee27)
+
+# Contributors
+<a href="https://github.com/DripIN-ORG/DripIn/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=DripIN-ORG/DripIn" />
+</a>
+
+# Repo Activity
+
+<img width="100%" src="https://repobeats.axiom.co/api/embed/2451ca82ac7ce1bccb5bebfb7b9445131ae985f9.svg" />

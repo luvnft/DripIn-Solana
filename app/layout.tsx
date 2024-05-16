@@ -28,7 +28,7 @@ export default function RootLayout({
     return (
         <html lang="en">
             <head>
-                <title>DripIN</title>
+                <title>CALL.</title>
             </head>
             <body className={`${sora.className}`}>
                 <ConnectionProvider endpoint={endpoint}>

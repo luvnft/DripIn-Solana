@@ -1,5 +1,5 @@
 import { Label } from "@/components/ui/label";
-import { Github, Twitter } from "lucide-react";
+import { Discord, Twitter } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export default function Footer() {
@@ -7,20 +7,22 @@ export default function Footer() {
         <footer className="w-full mx-auto border-t rounded-t-lg mt-4">
             <div className="max-w-[95vw] mx-auto py-6 flex justify-between items-center">
                 <Label className="flex items-center text-center">
-                    Made with ❤️ DripIN
+                    Made with ❤️ LUV NFT
                 </Label>
                 <div className="flex items-center gap-4">
-                    <Button
+                <Button
                         variant="outline"
                         className="cursor-pointer"
-                        onClick={()=>{window.open("https://github.com/DripIN-Community/DripIN", "_blank")}}
+                        onClick={() => {
+                        window.open("https://nftv.luvnft.com", "_blank");
+                    }}
                     >
-                        <Github />
+                    <Discord />
                     </Button>
                     <Button
                         variant="outline"
                         className="cursor-pointer"
-                        onClick={()=>{window.open("https://x.com/_DripIN", "_blank")}}
+                        onClick={()=>{window.open("https://x.com/luvnft", "_blank")}}
                     >
                         <Twitter />
                     </Button>

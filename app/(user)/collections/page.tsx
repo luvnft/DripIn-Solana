@@ -71,7 +71,7 @@ export default function CollectionPage() {
 
     return (
         <>
-            <title>{`DripIN - Collections`}</title>
+            <title>{`LUV NFT - Collections`}</title>
 
             <CommandDialog open={open} onOpenChange={setOpen}>
                 <Command>

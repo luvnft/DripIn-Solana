@@ -1,5 +1,5 @@
 import { Label } from "@/components/ui/label";
-import { Discord, Twitter } from "lucide-react";
+import { Gamepad2, Twitter } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export default function Footer() {
@@ -16,7 +16,7 @@ export default function Footer() {
                         onClick={() => {
                         window.open("https://nftv.luvnft.com", "_blank")}}
                     >
-                    <Discord />
+                    <Gamepad2 />
                     </Button>
                     <Button
                         variant="outline"

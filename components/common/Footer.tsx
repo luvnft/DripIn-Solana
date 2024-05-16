@@ -14,8 +14,7 @@ export default function Footer() {
                         variant="outline"
                         className="cursor-pointer"
                         onClick={() => {
-                        window.open("https://nftv.luvnft.com", "_blank");
-                    }}
+                        window.open("https://nftv.luvnft.com", "_blank")}}
                     >
                     <Discord />
                     </Button>

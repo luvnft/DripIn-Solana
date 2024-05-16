@@ -26,7 +26,7 @@ export default function Home() {
         <>
             <div className="flex flex-col items-center justify-center min-h-[90vh]">
                 <Label className="text-6xl max-sm:text-4xl max-sm:pb-4">A New Social CTA (Call To Action)</Label>
-                <Label className="text-xl">Only LUV NFT Solana holders can create a Huddle video call. Sell someone your LUV NFT to book a call. Subscribe to <a href="https://nftv.luvnft.com"><b>NFTV</b></a>  Discord to monetize your video calls.</Label>
+                <Label className="text-xl">Only LUV NFT Solana holders can create a Huddle video call. Sell someone your LUV NFT to book a call. Subscribe to <a href="https://nftv.luvnft.com"><b>NFTV</b></a>  Discord to sell video calls.</Label>
                 <div className="my-20 p-6 flex flex-col gap-4 items-center justify-center bg-slate-300 dark:bg-slate-800 rounded-lg">
                     <Label className="text-4xl">Built on</Label>
                     <div className="flex gap-8 items-center">
